@@ -5,24 +5,59 @@ import PackageDescription
 
 let package = Package(
     name: "MovementList",
+    defaultLocalization: "es",
+    platforms: [
+        .iOS(.v14),
+        .tvOS(.v14),
+        .macOS(.v10_15),
+        .watchOS(.v7)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "MovementList",
-            targets: ["MovementList"]),
+            name: "ExpensesList",
+            targets: ["ExpensesList"]),
+        .library(
+            name: "IncomesList",
+            targets: ["IncomesList"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(name: "DataManagement",
+                 url: "https://github.com/bastianX6/accounts-data-management.git",
+                 from: "1.0.1"),
+        .package(name: "AccountsUI",
+                 url: "https://github.com/bastianX6/accounts-ui.git",
+                 from: "1.0.2"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "MovementList",
-            dependencies: []),
+            name: "ExpensesList",
+            dependencies: [
+                "DataManagement",
+                "AccountsUI",
+                "Common"
+            ],
+            resources: [.process("Resources")]
+        ),
+        .target(
+            name: "IncomesList",
+            dependencies: [
+                "DataManagement",
+                "AccountsUI",
+                "Common"
+            ],
+            resources: [.process("Resources")]
+        ),
+        .target(
+            name: "Common",
+            dependencies: [
+                "DataManagement",
+                "AccountsUI"
+            ],
+            resources: [.process("Resources")]
+        ),
         .testTarget(
-            name: "MovementListTests",
-            dependencies: ["MovementList"]),
+            name: "CommonTests",
+            dependencies: ["Common"]
+        )
     ]
 )
