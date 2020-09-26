@@ -14,6 +14,9 @@ let package = Package(
     ],
     products: [
         .library(
+            name: "MovementListCommon",
+            targets: ["MovementListCommon"]),
+        .library(
             name: "ExpensesList",
             targets: ["ExpensesList"]),
         .library(
@@ -34,7 +37,7 @@ let package = Package(
             dependencies: [
                 "DataManagement",
                 "AccountsUI",
-                "Common"
+                "MovementListCommon"
             ],
             resources: [.process("Resources")]
         ),
@@ -43,12 +46,12 @@ let package = Package(
             dependencies: [
                 "DataManagement",
                 "AccountsUI",
-                "Common"
+                "MovementListCommon"
             ],
             resources: [.process("Resources")]
         ),
         .target(
-            name: "Common",
+            name: "MovementListCommon",
             dependencies: [
                 "DataManagement",
                 "AccountsUI"
@@ -56,8 +59,8 @@ let package = Package(
             resources: [.process("Resources")]
         ),
         .testTarget(
-            name: "CommonTests",
-            dependencies: ["Common"]
+            name: "MovementListCommonTests",
+            dependencies: ["MovementListCommon"]
         )
     ]
 )

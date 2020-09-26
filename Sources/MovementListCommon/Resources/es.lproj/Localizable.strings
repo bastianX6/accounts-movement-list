@@ -1,0 +1,4 @@
+// MARK: - Summary View
+"Expenses" = "Gastos";
+"Expenses of %@ - %@" = "Gastos de %@ - %@";
+"Filter" = "Filtrar";
