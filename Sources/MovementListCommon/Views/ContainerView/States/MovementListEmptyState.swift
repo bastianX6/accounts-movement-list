@@ -8,7 +8,7 @@
 import Foundation
 
 class MovementListEmptyState: MovementListState {
-    let showFilterView: Bool = false
+    var showFilterView: Bool = false
     let showErrorView: Bool = false
     let showLoadingView: Bool = false
     let showEmptyView: Bool = true

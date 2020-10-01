@@ -8,10 +8,10 @@
 import Foundation
 
 class MovementListWithDataState: MovementListState {
-    let showFilterView: Bool = false
+    var showFilterView: Bool = false
     let showErrorView: Bool = false
     let showLoadingView: Bool = false
-    let showEmptyView: Bool = true
+    let showEmptyView: Bool = false
 
     weak var viewModel: MovementListViewModel?
 

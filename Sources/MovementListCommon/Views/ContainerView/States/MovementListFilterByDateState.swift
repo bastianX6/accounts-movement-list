@@ -8,8 +8,8 @@
 import Foundation
 
 class MovementListFilterByDateState: MovementListState {
-    let showFilterView: Bool = false
-    let showErrorView: Bool = true
+    var showFilterView: Bool = true
+    let showErrorView: Bool = false
     let showLoadingView: Bool = false
     let showEmptyView: Bool = false
 

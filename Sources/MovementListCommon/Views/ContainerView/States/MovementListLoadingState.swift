@@ -11,7 +11,7 @@ import DataManagement
 import Foundation
 
 class MovementListLoadingState: MovementListState {
-    let showFilterView: Bool = false
+    var showFilterView: Bool = false
     let showErrorView: Bool = false
     let showLoadingView: Bool = true
     let showEmptyView: Bool = false
@@ -20,7 +20,7 @@ class MovementListLoadingState: MovementListState {
 
     weak var viewModel: MovementListViewModel?
 
-    init(viewModel: MovementListViewModel) {
+    init(viewModel: MovementListViewModel?) {
         self.viewModel = viewModel
     }
 
@@ -50,12 +50,10 @@ class MovementListLoadingState: MovementListState {
                     return
                 }
 
-                let stores = viewModel.isIncome ? viewModel.incomeData.stores : viewModel.expeditureData.stores
-
-                let elements = stores.map { store -> ExpeditureSimpleCardModel in
+                let elements = viewModel.stores.map { store -> ExpeditureSimpleCardModel in
                     let movementSum = movementData.first(where: { $0.id == store.id })?.sum ?? 0
                     return ExpeditureSimpleCardModel(name: store.name,
-                                                     amount: "$ \(movementSum)",
+                                                     amount: movementSum.currencyString,
                                                      systemImageName: "creditcard.fill",
                                                      imageTintColor: .indigo)
                 }

@@ -11,7 +11,7 @@ import DataManagement
 import Foundation
 
 protocol MovementListState {
-    var showFilterView: Bool { get }
+    var showFilterView: Bool { get set }
     var showErrorView: Bool { get }
     var showLoadingView: Bool { get }
     var showEmptyView: Bool { get }

@@ -13,31 +13,28 @@ import Foundation
 class MovementListViewModel: ObservableObject {
     @Published var model: SummaryListView.DataModel
     @Published var filterDate: Date
+    @Published var state: MovementListState = MovementListLoadingState(viewModel: nil)
 
     let readDataSource: DataSourceRead
-    let incomeData: MovementResources
-    let expeditureData: MovementResources
-    let isIncome: Bool = true
+    let stores: [CategoryStoreModel]
 
     // MARK: - States
 
-    private lazy var loadingState: MovementListState = MovementListLoadingState(viewModel: self)
-    private lazy var emptyState: MovementListState = MovementListEmptyState(viewModel: self)
-    private lazy var withDataState: MovementListState = MovementListWithDataState(viewModel: self)
-    private lazy var errorState: MovementListState = MovementListErrorState(viewModel: self)
-    private lazy var filterByDateState: MovementListState = MovementListFilterByDateState(viewModel: self)
-
-    private(set) lazy var state: MovementListState = self.loadingState
+    private var loadingState = MovementListLoadingState(viewModel: nil)
+    private lazy var emptyState = MovementListEmptyState(viewModel: self)
+    private lazy var withDataState = MovementListWithDataState(viewModel: self)
+    private lazy var errorState = MovementListErrorState(viewModel: self)
+    private lazy var filterByDateState = MovementListFilterByDateState(viewModel: self)
 
     init(filterDate: Date = Date(),
          readDataSource: DataSourceRead,
-         incomeData: MovementResources,
-         expeditureData: MovementResources) {
+         stores: [CategoryStoreModel]) {
         self.filterDate = filterDate
         self.readDataSource = readDataSource
-        self.incomeData = incomeData
-        self.expeditureData = expeditureData
+        self.stores = stores
         self.model = SummaryListView.DataModel()
+        self.loadingState.viewModel = self
+        self.state = self.loadingState
     }
 
     func updateDataModel(with elements: [ExpeditureSimpleCardModel]) {
@@ -47,10 +44,11 @@ class MovementListViewModel: ObservableObject {
     }
 
     func setState(_ state: MovementListStateEnum) {
+        self.filterByDateState.showFilterView = false
         switch state {
         case .loading:
             self.state = self.loadingState
-        case .error:
+        case .empty:
             self.state = self.emptyState
         case let .withData(elements):
             self.updateDataModel(with: elements)
@@ -58,6 +56,7 @@ class MovementListViewModel: ObservableObject {
         case .error:
             self.state = self.errorState
         case .filterByDate:
+            self.filterByDateState.showFilterView = true
             self.state = self.filterByDateState
         }
     }
