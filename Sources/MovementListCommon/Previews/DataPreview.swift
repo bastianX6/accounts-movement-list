@@ -38,4 +38,10 @@ enum DataPreview {
                                          systemImageName: "creditcard.fill",
                                          imageTintColor: color)
     }
+
+    static var summaryListDataModel: SummaryListView.DataModel {
+        return SummaryListView.DataModel(month: "Mayo",
+                                         year: "2019",
+                                         elements: self.simpleCardModelArray)
+    }
 }
