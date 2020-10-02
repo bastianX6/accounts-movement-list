@@ -54,8 +54,8 @@ class MovementListLoadingState: MovementListState {
                     let movementSum = movementData.first(where: { $0.id == store.id })?.sum ?? 0
                     return ExpeditureSimpleCardModel(name: store.name,
                                                      amount: movementSum.currencyString,
-                                                     systemImageName: "creditcard.fill",
-                                                     imageTintColor: .indigo)
+                                                     systemImageName: store.icon,
+                                                     imageTintColor: store.color)
                 }
 
                 viewModel.setState(.withData(elements: elements))

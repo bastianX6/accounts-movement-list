@@ -69,9 +69,9 @@ enum DataPreview {
 
     static var stores: [CategoryStoreModel] = {
         var array = [CategoryStoreModel]()
-        array.append(CategoryStoreModel(name: "Store 1", id: UUID()))
-        array.append(CategoryStoreModel(name: "Store 2", id: UUID()))
-        array.append(CategoryStoreModel(name: "Store 3", id: UUID()))
+        array.append(CategoryStoreModel(name: "Store 1", id: UUID(), color: .indigo, icon: "creditcard.fill"))
+        array.append(CategoryStoreModel(name: "Store 2", id: UUID(), color: .indigo, icon: "creditcard.fill"))
+        array.append(CategoryStoreModel(name: "Store 3", id: UUID(), color: .indigo, icon: "creditcard.fill"))
         return array
     }()
 
