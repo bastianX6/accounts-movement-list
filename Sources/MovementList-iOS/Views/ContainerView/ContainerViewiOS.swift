@@ -10,6 +10,10 @@ import SwiftUI
 struct ContainerViewiOS: View {
     @ObservedObject var viewModel: MovementListViewModel
 
+    private var viewTitle: String {
+        return self.viewModel.isIncome ? L10n.incomes : L10n.expenses
+    }
+
     public init(viewModel: MovementListViewModel) {
         self.viewModel = viewModel
     }
@@ -17,7 +21,7 @@ struct ContainerViewiOS: View {
     var body: some View {
         NavigationView {
             self.currentView
-                .navigationBarTitle(L10n.expenses)
+                .navigationBarTitle(self.viewTitle)
                 .navigationBarItems(trailing: self.filterButton)
         }
         .sheet(isPresented: self.$viewModel.state.showFilterView,
@@ -72,7 +76,8 @@ struct ContainerViewiOS: View {
     }
 
     private var listView: some View {
-        SummaryListView(model: self.$viewModel.model)
+        SummaryListView(model: self.$viewModel.model,
+                        isIncome: self.viewModel.isIncome)
     }
 
     // MARK: - Navigation items
@@ -89,7 +94,8 @@ struct ContainerViewiOS: View {
 
 struct ContainerViewiOS_Previews: PreviewProvider {
     @State static var viewModel = MovementListViewModel(readDataSource: MovementPreview(),
-                                                        stores: DataPreview.stores)
+                                                        categoryStoreElements: DataPreview.stores,
+                                                        isIncome: false)
     static var previews: some View {
         ContainerViewiOS(viewModel: self.viewModel)
     }

@@ -10,16 +10,27 @@ import SwiftUI
 
 struct SummaryListView: View {
     @Binding var model: DataModel
+    let isIncome: Bool
 
-    init(model: Binding<DataModel>) {
+    private var headerTitle: String {
+        return self.isIncome ?
+            L10n.incomesOf(self.model.month, self.model.year) : L10n.expensesOf(self.model.month, self.model.year)
+    }
+
+    private var imageName: String {
+        return self.isIncome ? "dollarsign.square.fill" : "dollarsign.circle.fill"
+    }
+
+    init(model: Binding<DataModel>, isIncome: Bool) {
         self._model = model
+        self.isIncome = isIncome
     }
 
     var body: some View {
         ScrollView {
-            ListHeaderView(systemImageName: "dollarsign.circle.fill",
+            ListHeaderView(systemImageName: self.imageName,
                            imageColor: .indigo,
-                           title: L10n.expensesOf(model.month, model.year))
+                           title: self.headerTitle)
                 .padding()
             ForEach(self.model.elements, id: \.id) { element in
                 ExpeditureSimpleCardView(model: element)
@@ -32,6 +43,6 @@ struct SummaryListView: View {
 struct SummaryListView_Previews: PreviewProvider {
     @State static var dataModel: SummaryListView.DataModel = DataPreview.summaryListDataModel
     static var previews: some View {
-        SummaryListView(model: self.$dataModel)
+        SummaryListView(model: self.$dataModel, isIncome: false)
     }
 }

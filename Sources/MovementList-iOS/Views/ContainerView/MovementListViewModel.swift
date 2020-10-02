@@ -17,7 +17,8 @@ class MovementListViewModel: ObservableObject {
     @Published var state: MovementListState = MovementListLoadingState(viewModel: nil)
 
     let readDataSource: DataSourceRead
-    let stores: [CategoryStoreModel]
+    let categoryStoreElements: [CategoryStoreModel]
+    let isIncome: Bool
 
     // MARK: - States
 
@@ -29,10 +30,12 @@ class MovementListViewModel: ObservableObject {
 
     init(filterDate: Date = Date(),
          readDataSource: DataSourceRead,
-         stores: [CategoryStoreModel]) {
+         categoryStoreElements: [CategoryStoreModel],
+         isIncome: Bool) {
         self.filterDate = filterDate
         self.readDataSource = readDataSource
-        self.stores = stores
+        self.categoryStoreElements = categoryStoreElements
+        self.isIncome = isIncome
         self.model = SummaryListView.DataModel()
         self.loadingState.viewModel = self
         self.state = self.loadingState

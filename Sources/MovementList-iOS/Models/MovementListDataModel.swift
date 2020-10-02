@@ -13,14 +13,18 @@ import Foundation
 public struct MovementListDataModel {
     let dataSource: DataSourceRead
     let resources: MovementResources
+    let isIncome: Bool
 
     /// Default initializer
     /// - Parameters:
     ///   - dataSource: data source used to store data
     ///   - resources: data with category and stores
+    ///   - isIncome: flag that indicates if given data is for incomes or expenses
     public init(dataSource: DataSourceRead,
-                resources: MovementResources) {
+                resources: MovementResources,
+                isIncome: Bool) {
         self.dataSource = dataSource
         self.resources = resources
+        self.isIncome = isIncome
     }
 }

@@ -1,4 +1,6 @@
 // MARK: - Summary View
 "Expenses" = "Gastos";
+"Incomes" = "Ingresos";
 "Expenses of %@ - %@" = "Gastos de %@ - %@";
+"Incomes of %@ - %@" = "Ingresos de %@ - %@";
 "Filter" = "Filtrar";

@@ -35,8 +35,16 @@ class MovementListLoadingState: MovementListState {
         guard let startDate = viewModel.filterDate.startOfMonth(),
             let endDate = viewModel.filterDate.endOfMonth() else { return }
         let query = ReadMovementsQuery(fromDate: startDate, toDate: endDate)
-        let cancellable = viewModel.readDataSource
-            .getMovementSumByStore(query: query).sink { completion in
+        let publisher: AnyPublisher<[MovementsSum], Error>
+
+        if viewModel.isIncome {
+            publisher = viewModel.readDataSource.getMovementSumByCategory(query: query)
+        } else {
+            publisher = viewModel.readDataSource.getMovementSumByStore(query: query)
+        }
+
+        let cancellable = publisher
+            .sink { completion in
                 switch completion {
                 case .finished:
                     // Check receive value to make state transition
@@ -50,12 +58,12 @@ class MovementListLoadingState: MovementListState {
                     return
                 }
 
-                let elements = viewModel.stores.map { store -> ExpeditureSimpleCardModel in
-                    let movementSum = movementData.first(where: { $0.id == store.id })?.sum ?? 0
-                    return ExpeditureSimpleCardModel(name: store.name,
+                let elements = viewModel.categoryStoreElements.map { element -> ExpeditureSimpleCardModel in
+                    let movementSum = movementData.first(where: { $0.id == element.id })?.sum ?? 0
+                    return ExpeditureSimpleCardModel(name: element.name,
                                                      amount: movementSum.currencyString,
-                                                     systemImageName: store.icon,
-                                                     imageTintColor: store.color)
+                                                     systemImageName: element.icon,
+                                                     imageTintColor: element.color)
                 }
 
                 viewModel.setState(.withData(elements: elements))
