@@ -14,8 +14,8 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "MovementListCommon",
-            targets: ["MovementListCommon"]),
+            name: "MovementList-iOS",
+            targets: ["MovementList-iOS"]),
         .library(
             name: "ExpensesList",
             targets: ["ExpensesList"]),
@@ -55,6 +55,15 @@ let package = Package(
             dependencies: [
                 "DataManagement",
                 "AccountsUI"
+            ],
+            resources: [.process("Resources")]
+        ),
+        .target(
+            name: "MovementList-iOS",
+            dependencies: [
+                "DataManagement",
+                "AccountsUI",
+                "MovementListCommon"
             ],
             resources: [.process("Resources")]
         ),

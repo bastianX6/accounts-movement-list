@@ -9,6 +9,7 @@ import AccountsUI
 import Combine
 import DataManagement
 import Foundation
+import MovementListCommon
 
 class MovementListViewModel: ObservableObject {
     @Published var model: SummaryListView.DataModel
