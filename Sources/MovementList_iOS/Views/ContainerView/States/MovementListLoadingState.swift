@@ -15,6 +15,7 @@ class MovementListLoadingState: MovementListState {
     let showErrorView: Bool = false
     let showLoadingView: Bool = true
     let showEmptyView: Bool = false
+    var error: Error?
 
     private var cancellables: [AnyCancellable] = []
 
@@ -50,14 +51,9 @@ class MovementListLoadingState: MovementListState {
                     // Check receive value to make state transition
                     break
                 case let .failure(error):
-                    viewModel.setState(.error)
+                    viewModel.setState(.error(error: error))
                 }
             } receiveValue: { movementData in
-                guard !movementData.isEmpty else {
-                    viewModel.setState(.empty)
-                    return
-                }
-
                 let elements = viewModel.categoryStoreElements.map { element -> ExpeditureSimpleCardModel in
                     let movementSum = movementData.first(where: { $0.id == element.id })?.sum ?? 0
                     return ExpeditureSimpleCardModel(name: element.name,

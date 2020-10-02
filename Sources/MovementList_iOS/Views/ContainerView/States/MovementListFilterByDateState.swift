@@ -12,6 +12,7 @@ class MovementListFilterByDateState: MovementListState {
     let showErrorView: Bool = false
     let showLoadingView: Bool = false
     let showEmptyView: Bool = false
+    var error: Error?
 
     weak var viewModel: MovementListViewModel?
 

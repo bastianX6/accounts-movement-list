@@ -5,6 +5,7 @@
 //  Created by Bastián Véliz Vega on 01-10-20.
 //
 
+import AccountsUI
 import SwiftUI
 
 struct ContainerViewiOS: View {
@@ -21,6 +22,9 @@ struct ContainerViewiOS: View {
     var body: some View {
         NavigationView {
             self.currentView
+                .onAppear(perform: {
+                    self.viewModel.setState(.loading)
+                })
                 .navigationBarTitle(self.viewTitle)
                 .navigationBarItems(trailing: self.filterButton)
         }
@@ -36,9 +40,7 @@ struct ContainerViewiOS: View {
     }
 
     private var currentView: some View {
-        if self.viewModel.state.showEmptyView {
-            return self.emptyView.eraseToAnyView()
-        } else if self.viewModel.state.showErrorView {
+        if self.viewModel.state.showErrorView {
             return self.errorView.eraseToAnyView()
         } else if self.viewModel.state.showLoadingView {
             self.viewModel.state.filterData()
@@ -48,25 +50,18 @@ struct ContainerViewiOS: View {
         }
     }
 
-    private var emptyView: some View {
-        Text("Empty view")
-    }
-
     private var filterView: some View {
         Text("Filter view")
     }
 
     private var errorView: some View {
-        Text("Error view")
+        GenericErrorView(title: L10n.coulndTLoadYourData,
+                         error: self.viewModel.state.error)
     }
 
     private var loadingView: some View {
         VStack {
-            if #available(iOS 14.0, *) {
-                ProgressView()
-            } else {
-                Text("Loading")
-            }
+            ProgressView()
         }
         .frame(minWidth: 0,
                maxWidth: .infinity,
@@ -93,10 +88,26 @@ struct ContainerViewiOS: View {
 }
 
 struct ContainerViewiOS_Previews: PreviewProvider {
+    enum FakeError: Error {
+        case fake
+    }
+
     @State static var viewModel = MovementListViewModel(readDataSource: MovementPreview(),
                                                         categoryStoreElements: DataPreview.stores,
                                                         isIncome: false)
+
+    @State static var viewModelWithErrorState: MovementListViewModel = {
+        let viewModel = MovementListViewModel(readDataSource: MovementPreview(),
+                                              categoryStoreElements: DataPreview.stores,
+                                              isIncome: false)
+        viewModel.setState(.error(error: FakeError.fake))
+        return viewModel
+    }()
+
     static var previews: some View {
-        ContainerViewiOS(viewModel: self.viewModel)
+        Group {
+            ContainerViewiOS(viewModel: self.viewModel)
+            ContainerViewiOS(viewModel: self.viewModelWithErrorState)
+        }
     }
 }

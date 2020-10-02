@@ -14,15 +14,14 @@ protocol MovementListState {
     var showFilterView: Bool { get set }
     var showErrorView: Bool { get }
     var showLoadingView: Bool { get }
-    var showEmptyView: Bool { get }
+    var error: Error? { get set }
 
     func filterData()
 }
 
 enum MovementListStateEnum {
     case loading
-    case empty
     case withData(elements: [ExpeditureSimpleCardModel])
-    case error
+    case error(error: Error?)
     case filterByDate
 }

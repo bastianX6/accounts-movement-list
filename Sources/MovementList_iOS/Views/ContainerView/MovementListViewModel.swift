@@ -23,7 +23,6 @@ class MovementListViewModel: ObservableObject {
     // MARK: - States
 
     private var loadingState = MovementListLoadingState(viewModel: nil)
-    private lazy var emptyState = MovementListEmptyState(viewModel: self)
     private lazy var withDataState = MovementListWithDataState(viewModel: self)
     private lazy var errorState = MovementListErrorState(viewModel: self)
     private lazy var filterByDateState = MovementListFilterByDateState(viewModel: self)
@@ -52,12 +51,11 @@ class MovementListViewModel: ObservableObject {
         switch state {
         case .loading:
             self.state = self.loadingState
-        case .empty:
-            self.state = self.emptyState
         case let .withData(elements):
             self.updateDataModel(with: elements)
             self.state = self.withDataState
-        case .error:
+        case let .error(error):
+            self.errorState.error = error
             self.state = self.errorState
         case .filterByDate:
             self.filterByDateState.showFilterView = true

@@ -1,17 +1,18 @@
 //
-//  MovementListErrorState.swift
-//  
+//  MovementListWithDataState.swift
+//
 //
 //  Created by Bastián Véliz Vega on 01-10-20.
 //
 
 import Foundation
 
-class MovementListErrorState: MovementListState {
+class MovementListWithDataState: MovementListState {
     var showFilterView: Bool = false
-    let showErrorView: Bool = true
+    let showErrorView: Bool = false
     let showLoadingView: Bool = false
     let showEmptyView: Bool = false
+    var error: Error?
 
     weak var viewModel: MovementListViewModel?
 

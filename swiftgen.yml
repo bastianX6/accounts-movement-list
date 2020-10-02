@@ -1,5 +1,5 @@
 strings:
-  inputs: Sources/MovementList-iOS/Resources/es.lproj
+  inputs: Sources/MovementList_iOS/Resources/es.lproj
   outputs:
     - templateName: structured-swift5
-      output: Sources/MovementList-iOS/Localization/Strings.swift
+      output: Sources/MovementList_iOS/Localization/Strings.swift
