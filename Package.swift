@@ -17,11 +17,8 @@ let package = Package(
             name: "MovementList_iOS",
             targets: ["MovementList_iOS"]),
         .library(
-            name: "ExpensesList",
-            targets: ["ExpensesList"]),
-        .library(
-            name: "IncomesList",
-            targets: ["IncomesList"]),
+            name: "MovementDetails_iOS",
+            targets: ["MovementDetails_iOS"]),
     ],
     dependencies: [
         .package(name: "DataManagement",
@@ -33,24 +30,6 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "ExpensesList",
-            dependencies: [
-                "DataManagement",
-                "AccountsUI",
-                "MovementListCommon"
-            ],
-            resources: [.process("Resources")]
-        ),
-        .target(
-            name: "IncomesList",
-            dependencies: [
-                "DataManagement",
-                "AccountsUI",
-                "MovementListCommon"
-            ],
-            resources: [.process("Resources")]
-        ),
-        .target(
             name: "MovementListCommon",
             dependencies: [
                 "DataManagement",
@@ -60,6 +39,15 @@ let package = Package(
         ),
         .target(
             name: "MovementList_iOS",
+            dependencies: [
+                "DataManagement",
+                "AccountsUI",
+                "MovementListCommon"
+            ],
+            resources: [.process("Resources")]
+        ),
+        .target(
+            name: "MovementDetails_iOS",
             dependencies: [
                 "DataManagement",
                 "AccountsUI",
