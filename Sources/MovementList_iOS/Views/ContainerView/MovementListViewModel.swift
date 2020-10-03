@@ -16,6 +16,18 @@ class MovementListViewModel: ObservableObject {
     @Published var filterDate: Date
     @Published var state: MovementListState = MovementListLoadingState(viewModel: nil)
 
+    @Published var selectedMonth: Int {
+        didSet {
+            self.updateDate()
+        }
+    }
+
+    @Published var selectedYear: Int {
+        didSet {
+            self.updateDate()
+        }
+    }
+
     let readDataSource: DataSourceRead
     let categoryStoreElements: [CategoryStoreModel]
     let isIncome: Bool
@@ -36,8 +48,13 @@ class MovementListViewModel: ObservableObject {
         self.categoryStoreElements = categoryStoreElements
         self.isIncome = isIncome
         self.model = SummaryListView.DataModel()
-        self.loadingState.viewModel = self
         self.state = self.loadingState
+
+        let calendar = Calendar.current
+        self.selectedMonth = calendar.component(.month, from: filterDate)
+        self.selectedYear = calendar.component(.year, from: filterDate)
+
+        self.loadingState.viewModel = self
     }
 
     func updateDataModel(with elements: [ExpeditureSimpleCardModel]) {
@@ -62,4 +79,17 @@ class MovementListViewModel: ObservableObject {
             self.state = self.filterByDateState
         }
     }
+
+    private func updateDate() {
+        let calendar = Calendar.current
+        var component = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self.filterDate)
+        component.month = self.selectedMonth
+        component.year = self.selectedYear
+        guard let date = calendar.date(from: component) else {
+            fatalError("Couldn't get date")
+        }
+        self.filterDate = date
+    }
+
+    private func updateSelectedElementsFromDate() {}
 }

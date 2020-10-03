@@ -51,7 +51,11 @@ struct ContainerViewiOS: View {
     }
 
     private var filterView: some View {
-        Text("Filter view")
+        FilterView(selectedMonth: self.$viewModel.selectedMonth,
+                   selectedYear: self.$viewModel.selectedYear)
+            .navigationBarTitle(L10n.filter)
+            .navigationBarItems(leading: self.cancelButton,
+                                trailing: self.applyFilterButton)
     }
 
     private var errorView: some View {
@@ -84,6 +88,22 @@ struct ContainerViewiOS: View {
             Text(L10n.filter)
         }
         .disabled(self.viewModel.state.showLoadingView)
+    }
+
+    private var applyFilterButton: some View {
+        Button {
+            self.viewModel.setState(.loading)
+        } label: {
+            Text(L10n.filter)
+        }
+    }
+
+    private var cancelButton: some View {
+        Button {
+            self.viewModel.setState(.loading)
+        } label: {
+            Text(L10n.cancel)
+        }
     }
 }
 
