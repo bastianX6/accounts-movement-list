@@ -22,11 +22,13 @@ struct ContainerViewiOS: View {
     var body: some View {
         NavigationView {
             self.currentView
+                .background(Color.systemGray6)
                 .onAppear(perform: {
                     self.viewModel.setState(.loading)
                 })
                 .navigationBarTitle(self.viewTitle)
                 .navigationBarItems(trailing: self.filterButton)
+                .navigationBarTitleDisplayMode(.inline)
         }
         .sheet(isPresented: self.$viewModel.state.showFilterView,
                onDismiss: {
