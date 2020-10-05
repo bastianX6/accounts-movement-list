@@ -29,15 +29,7 @@ public enum MovementDetailsMapper {
         let otherMovements = movements.filter { !$0.isPermanent }
 
         // summary
-        let permamentMovementsTotal = permanentMovements.reduce(into: 0) { $0 += $1.amount }
-        let otherMovementsTotal = otherMovements.reduce(into: 0) { $0 += $1.amount }
-        let allMovementsTotal = permamentMovementsTotal + otherMovementsTotal
-
-        let summary = MovementDetailsSummary(permamentMovementsTotal: permamentMovementsTotal,
-                                             otherMovementsTotal: otherMovementsTotal,
-                                             allMovementsTotal: allMovementsTotal)
-
-        // grouping elements
+        let summary = self.getSummary(movements: movements)
 
         // permament movements
         let permanentMovementsDict = self.getGroupedDictionary(movements: permanentMovements)
@@ -56,6 +48,21 @@ public enum MovementDetailsMapper {
                                      otherMovements: otherMovementItems)
     }
 
+    /// Get a summary of movements
+    /// - Parameters:
+    ///   - movements: movements array
+    /// - Returns: An instance of `MovementDetailsSummary`
+    static func getSummary(movements: [Movement]) -> MovementDetailsSummary {
+        let permamentMovementsTotal = movements.reduce(into: 0) { $0 += $1.isPermanent ? $1.amount : 0 }
+        let otherMovementsTotal = movements.reduce(into: 0) { $0 += $1.isPermanent ? 0 : $1.amount }
+        let allMovementsTotal = permamentMovementsTotal + otherMovementsTotal
+
+        let summary = MovementDetailsSummary(permamentMovementsTotal: permamentMovementsTotal,
+                                             otherMovementsTotal: otherMovementsTotal,
+                                             allMovementsTotal: allMovementsTotal)
+        return summary
+    }
+
     /// Groups a `Movement` array by date
     /// - Parameter movements: movements to group
     /// - Returns: A dictionary with a `Date` as key and a `Movement` array as values
@@ -65,7 +72,9 @@ public enum MovementDetailsMapper {
             let dateComponents = calendar.dateComponents([.day, .year, .month],
                                                          from: movement.date)
 
-            guard let date = dateComponents.date else { return Date() }
+            guard let date = calendar.date(from: dateComponents) else {
+                fatalError("Couldn't get date from date components")
+            }
 
             return date
         }
@@ -80,7 +89,7 @@ public enum MovementDetailsMapper {
     static func getArrayFromDictionary(_ dict: [Date: [Movement]],
                                        icon: String,
                                        color: Color) -> [MovementDetailsItem] {
-        return dict.map { date, movements -> MovementDetailsItem in
+        let array = dict.map { date, movements -> MovementDetailsItem in
             let detailCardModel = movements.map {
                 ExpeditureDetailCardModel(systemImageName: icon,
                                           imageTintColor: color,
@@ -91,5 +100,7 @@ public enum MovementDetailsMapper {
 
             return MovementDetailsItem(date: date, detailModels: detailCardModel)
         }
+
+        return array.sorted(by: { $0.date > $1.date })
     }
 }
