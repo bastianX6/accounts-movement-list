@@ -23,6 +23,7 @@ struct ContainerViewiOS: View {
         NavigationView {
             self.currentView
                 .background(Color.systemGray6)
+                .fullBackgroundColor(.systemGray6)
                 .onAppear(perform: {
                     self.viewModel.setState(.loading)
                 })

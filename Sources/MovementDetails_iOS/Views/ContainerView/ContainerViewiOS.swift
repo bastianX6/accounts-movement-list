@@ -22,6 +22,7 @@ struct ContainerViewiOS: View {
     var body: some View {
         self.currentView
             .background(Color.systemGray6)
+            .fullBackgroundColor(.systemGray6)
             .navigationBarTitle(self.viewTitle)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
