@@ -24,7 +24,7 @@ public enum MovementDetailsMapper {
      */
     public static func getModel(from movements: [Movement],
                                 icon: String,
-                                tintColor: Color) -> MovementsDetailsModel {
+                                tintColor: Color) -> MovementDetailsModel {
         let permanentMovements = movements.filter { $0.isPermanent }
         let otherMovements = movements.filter { !$0.isPermanent }
 
@@ -43,7 +43,7 @@ public enum MovementDetailsMapper {
                                                              icon: icon,
                                                              color: tintColor)
 
-        return MovementsDetailsModel(summary: summary,
+        return MovementDetailsModel(summary: summary,
                                      permanentMovements: permanentsMovementItems,
                                      otherMovements: otherMovementItems)
     }

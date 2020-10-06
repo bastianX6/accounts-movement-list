@@ -1,5 +1,5 @@
 //
-//  MovementsDetailsModel.swift
+//  MovementDetailsModel.swift
 //
 //
 //  Created by Bastián Véliz Vega on 05-10-20.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct MovementsDetailsModel {
+public struct MovementDetailsModel {
     /// Movement summary information
     public let summary: MovementDetailsSummary
 

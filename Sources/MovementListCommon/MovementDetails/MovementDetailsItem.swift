@@ -8,7 +8,10 @@
 import AccountsUI
 import Foundation
 
-public struct MovementDetailsItem {
+public struct MovementDetailsItem: Identifiable {
+    /// Item id. Default value: UUID()
+    public let id: UUID = UUID()
+
     /// Movement date. It's the same for all movements
     public let date: Date
 

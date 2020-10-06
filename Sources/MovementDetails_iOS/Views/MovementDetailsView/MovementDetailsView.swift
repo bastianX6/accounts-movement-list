@@ -6,10 +6,12 @@
 //
 
 import AccountsUI
+import MovementListCommon
 import SwiftUI
 
 struct MovementDetailsView: View {
     let tintColor: Color
+    let model: MovementDetailsModel
 
     var body: some View {
         ScrollView {
@@ -17,7 +19,6 @@ struct MovementDetailsView: View {
             self.permanentExpensesView
             self.otherExpensesView
         }
-        .padding(EdgeInsets(top: 0, leading: 14, bottom: 14, trailing: 14))
         .background(Color.systemGray6)
     }
 
@@ -26,8 +27,49 @@ struct MovementDetailsView: View {
             ListHeaderView(systemImageName: "creditcard.fill",
                            imageColor: self.tintColor,
                            title: L10n.summary)
-            Text("Summary view")
+
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(L10n.permanentExpenses)
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               alignment: .leading)
+                    Text(model.summary.permamentMovementsTotal.currencyString)
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               alignment: .trailing)
+                }
+                HStack {
+                    Text(L10n.otherExpenses)
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               alignment: .leading)
+                    Text(model.summary.otherMovementsTotal.currencyString)
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               alignment: .trailing)
+                }
+                Divider()
+                HStack {
+                    Text(L10n.total)
+                        .bold()
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               alignment: .leading)
+                    Text(model.summary.allMovementsTotal.currencyString)
+                        .bold()
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               alignment: .trailing)
+                }
+            }
+            .padding()
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .background(Color.backgroundColor)
+            .cornerRadius(10)
+            .shadow(radius: 2)
         }
+        .padding()
     }
 
     private var permanentExpensesView: some View {
@@ -35,8 +77,17 @@ struct MovementDetailsView: View {
             ListHeaderView(systemImageName: "dollarsign.circle.fill",
                            imageColor: self.tintColor,
                            title: L10n.permanentExpenses)
-            Text("permanent expenses")
+            ForEach(self.model.permanentMovements) { movementItem in
+                Text(movementItem.date.relativeDateString)
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           alignment: .leading)
+                ForEach(movementItem.detailModels) { movement in
+                    ExpeditureDetailCardView(model: movement)
+                }
+            }
         }
+        .padding()
     }
 
     private var otherExpensesView: some View {
@@ -44,13 +95,23 @@ struct MovementDetailsView: View {
             ListHeaderView(systemImageName: "bag.fill",
                            imageColor: self.tintColor,
                            title: L10n.otherExpenses)
-            Text("Other expenses")
+            ForEach(self.model.otherMovements) { movementItem in
+                Text(movementItem.date.relativeDateString)
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           alignment: .leading)
+                ForEach(movementItem.detailModels) { movement in
+                    ExpeditureDetailCardView(model: movement)
+                }
+            }
         }
+        .padding()
     }
 }
 
 struct MovementDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        MovementDetailsView(tintColor: .indigo)
+        MovementDetailsView(tintColor: .indigo,
+                            model: DataPreview.movementDetailsModel)
     }
 }

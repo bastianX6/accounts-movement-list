@@ -28,4 +28,13 @@ public extension Date {
         dateFormatter.dateFormat = "YYYY"
         return dateFormatter.string(from: self)
     }
+
+    var relativeDateString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .medium
+        dateFormatter.locale = Locale.current
+        dateFormatter.doesRelativeDateFormatting = true
+        return dateFormatter.string(from: self)
+    }
 }
