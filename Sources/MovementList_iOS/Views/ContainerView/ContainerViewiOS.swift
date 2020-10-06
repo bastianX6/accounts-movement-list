@@ -31,6 +31,7 @@ struct ContainerViewiOS: View {
                 .navigationBarItems(trailing: self.filterButton)
                 .navigationBarTitleDisplayMode(.inline)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .sheet(isPresented: self.$viewModel.state.showFilterView,
                onDismiss: {
                    self.viewModel.setState(.loading)
