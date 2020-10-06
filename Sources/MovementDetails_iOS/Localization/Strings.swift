@@ -10,6 +10,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  /// No pudimos obtener la información
+  internal static let coulndTLoadYourData = L10n.tr("Localizable", "Coulnd't load your data")
   /// Compras en cuotas
   internal static let multiPaymentExpenses = L10n.tr("Localizable", "Multi-payment expenses")
   /// Otros gastos

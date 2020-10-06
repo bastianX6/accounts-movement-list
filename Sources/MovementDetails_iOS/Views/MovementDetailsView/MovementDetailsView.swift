@@ -10,8 +10,8 @@ import MovementListCommon
 import SwiftUI
 
 struct MovementDetailsView: View {
+    @Binding var model: MovementDetailsModel
     let tintColor: Color
-    let model: MovementDetailsModel
     let isIncome: Bool
 
     private var permanentMovementsTitle: String {
@@ -127,13 +127,15 @@ struct MovementDetailsView: View {
 }
 
 struct MovementDetailsView_Previews: PreviewProvider {
+    @State static var model: MovementDetailsModel = DataPreview.movementDetailsModel
+
     static var previews: some View {
         Group {
-            MovementDetailsView(tintColor: .indigo,
-                                model: DataPreview.movementDetailsModel,
+            MovementDetailsView(model: self.$model,
+                                tintColor: .indigo,
                                 isIncome: false)
-            MovementDetailsView(tintColor: .indigo,
-                                model: DataPreview.movementDetailsModel,
+            MovementDetailsView(model: self.$model,
+                                tintColor: .indigo,
                                 isIncome: true)
         }
     }

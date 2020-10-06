@@ -5,38 +5,35 @@
 //  Created by Bastián Véliz Vega on 05-10-20.
 //
 
+import AccountsUI
 import DataManagement
 import Foundation
 import SwiftUI
 
 /// Struct with all required data to init the module
 public struct MovementDetailsDataModel {
-    let dataSource: DataSourceRead
+    let categoryStoreData: CategoryStoreModel
     let isIncome: Bool
-    let categoryStoreId: UUID
+    let dataSource: DataSourceRead
     let fromDate: Date
     let toDate: Date
-    let tintColor: Color
 
     /// Default initializer
     /// - Parameters:
-    ///   - dataSource: `DataSourceRead` instance used to get movements
+    ///   - categoryStoreData: category / store information
     ///   - isIncome: used to check is managed data is for incomes or expenses
-    ///   - categoryStoreId: UUID of category / store
-    ///   - fromDate: starting date
-    ///   - toDate: ending date
-    ///   - tintColor: view tint color
-    public init(dataSource: DataSourceRead,
+    ///   - dataSource: `DataSourceRead` instance used to get movements for the given category / store
+    ///   - fromDate: starting date to query movements
+    ///   - toDate: ending date to query movements
+    public init(categoryStoreData: CategoryStoreModel,
                 isIncome: Bool,
-                categoryStoreId: UUID,
+                dataSource: DataSourceRead,
                 fromDate: Date,
-                toDate: Date,
-                tintColor: Color) {
-        self.dataSource = dataSource
+                toDate: Date) {
+        self.categoryStoreData = categoryStoreData
         self.isIncome = isIncome
-        self.categoryStoreId = categoryStoreId
+        self.dataSource = dataSource
         self.fromDate = fromDate
         self.toDate = toDate
-        self.tintColor = tintColor
     }
 }

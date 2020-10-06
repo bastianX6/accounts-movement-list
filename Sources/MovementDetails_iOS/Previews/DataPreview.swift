@@ -45,36 +45,42 @@ enum DataPreview {
 
     // MARK: - Movement previews
 
-    static var movementDetailsModel: MovementDetailsModel {
+    static var movements: [Movement] {
         let date1 = Date()
 
         let calendar = Calendar.current
         let date2 = calendar.date(byAdding: .day, value: -2, to: date1) ?? Date()
 
-        let movement1 = PreviewMovement(name: "movement 1",
+        let movement1 = PreviewMovement(id: self.storeCategory.id,
+                                        name: "movement 1",
                                         description: "This is a movement",
                                         amount: 100,
                                         date: date1,
                                         isPermanent: true)
-        let movement2 = PreviewMovement(name: "movement 2",
+        let movement2 = PreviewMovement(id: self.storeCategory.id,
+                                        name: "movement 2",
                                         description: "This is a movement",
                                         amount: 200,
                                         date: date1)
-        let movement3 = PreviewMovement(name: "movement 3",
+        let movement3 = PreviewMovement(id: self.storeCategory.id,
+                                        name: "movement 3",
                                         description: "This is a movement",
                                         amount: 300,
                                         date: date1,
                                         isPermanent: true)
-        let movement4 = PreviewMovement(name: "movement 4",
+        let movement4 = PreviewMovement(id: self.storeCategory.id,
+                                        name: "movement 4",
                                         description: "This is a movement",
                                         amount: 400,
                                         date: date2)
-        let movement5 = PreviewMovement(name: "movement 5",
+        let movement5 = PreviewMovement(id: self.storeCategory.id,
+                                        name: "movement 5",
                                         description: "This is a movement",
                                         amount: 500,
                                         date: date2,
                                         isPermanent: true)
-        let movement6 = PreviewMovement(name: "movement 6",
+        let movement6 = PreviewMovement(id: self.storeCategory.id,
+                                        name: "movement 6",
                                         description: "This is a movement",
                                         amount: 600,
                                         date: date2)
@@ -86,7 +92,11 @@ enum DataPreview {
                          movement5,
                          movement6]
 
-        return MovementDetailsMapper.getModel(from: movements,
+        return movements
+    }
+
+    static var movementDetailsModel: MovementDetailsModel {
+        return MovementDetailsMapper.getModel(from: self.movements,
                                               icon: "creditcard.fill",
                                               tintColor: .indigo)
     }
@@ -123,6 +133,10 @@ enum DataPreview {
 
     // MARK: - Stores
 
+    static var storeCategory: CategoryStoreModel = {
+        CategoryStoreModel(name: "Store 1", id: UUID(), color: .indigo, icon: "creditcard.fill")
+    }()
+
     static var stores: [CategoryStoreModel] = {
         var array = [CategoryStoreModel]()
         array.append(CategoryStoreModel(name: "Store 1", id: UUID(), color: .indigo, icon: "creditcard.fill"))
@@ -135,5 +149,18 @@ enum DataPreview {
 
     static var movementResources: MovementResources {
         return MovementResources(categories: [], stores: self.stores)
+    }
+
+    static var dataModel: MovementDetailsDataModel {
+        let date1 = Date()
+
+        let calendar = Calendar.current
+        let date2 = calendar.date(byAdding: .day, value: -2, to: date1) ?? Date()
+
+        return MovementDetailsDataModel(categoryStoreData: self.storeCategory,
+                                        isIncome: false,
+                                        dataSource: MovementPreview(),
+                                        fromDate: date2,
+                                        toDate: date1)
     }
 }

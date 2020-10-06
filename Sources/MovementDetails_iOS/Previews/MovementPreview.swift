@@ -18,7 +18,7 @@ class MovementPreview: DataSourceRead {
 
     func readMovements(query _: ReadMovementsQuery) -> AnyPublisher<[Movement], Error> {
         let future = Future<[Movement], Error>() { promise in
-            promise(.success([]))
+            promise(.success(DataPreview.movements))
         }
         return future.eraseToAnyPublisher()
     }

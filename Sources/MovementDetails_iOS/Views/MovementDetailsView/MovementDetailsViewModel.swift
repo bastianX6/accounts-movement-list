@@ -21,10 +21,6 @@ class MovementDetailsViewModel: ObservableObject {
 
     let dataModel: MovementDetailsDataModel
 
-    var modelIcon: String {
-        return self.dataModel.isIncome ? "dollarsign.square.fill" : "creditcard.fill"
-    }
-
     init(dataModel: MovementDetailsDataModel) {
         self.dataModel = dataModel
         self.model = MovementDetailsMapper.getModel(from: [],
