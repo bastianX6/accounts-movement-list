@@ -77,8 +77,8 @@ struct ContainerViewiOS: View {
     }
 
     private var listView: some View {
-        SummaryListView(model: self.$viewModel.model,
-                        isIncome: self.viewModel.isIncome)
+        SummaryListView(viewModel: self.viewModel,
+                        dataModel: self.$viewModel.model)
     }
 
     // MARK: - Navigation items

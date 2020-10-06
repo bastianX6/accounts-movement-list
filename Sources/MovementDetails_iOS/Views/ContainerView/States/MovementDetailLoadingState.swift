@@ -38,7 +38,8 @@ class MovementDetailLoadingState: MovementDetailViewState {
                                        paymentId: nil)
 
         let cancellable = viewModel.dataModel.dataSource.readMovements(query: query)
-            .sink { [weak self] completion in
+            .receive(on: RunLoop.main)
+            .sink { completion in
                 switch completion {
                 case let .failure(error):
                     viewModel.setState(.error(error: error))

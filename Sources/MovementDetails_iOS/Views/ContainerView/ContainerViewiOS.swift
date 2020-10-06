@@ -20,12 +20,13 @@ struct ContainerViewiOS: View {
     }
 
     var body: some View {
-        NavigationView {
-            self.currentView
-                .background(Color.systemGray6)
-                .navigationBarTitle(self.viewTitle)
-                .navigationBarTitleDisplayMode(.inline)
-        }
+        self.currentView
+            .background(Color.systemGray6)
+            .navigationBarTitle(self.viewTitle)
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                self.viewModel.setState(.loading)
+            }
     }
 
     private var currentView: some View {

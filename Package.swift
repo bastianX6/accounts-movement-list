@@ -42,7 +42,8 @@ let package = Package(
             dependencies: [
                 "DataManagement",
                 "AccountsUI",
-                "MovementListCommon"
+                "MovementListCommon",
+                "MovementDetails_iOS"
             ],
             resources: [.process("Resources")]
         ),

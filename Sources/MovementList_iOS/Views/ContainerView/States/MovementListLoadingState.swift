@@ -45,6 +45,7 @@ class MovementListLoadingState: MovementListState {
         }
 
         let cancellable = publisher
+            .receive(on: RunLoop.main)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -56,7 +57,8 @@ class MovementListLoadingState: MovementListState {
             } receiveValue: { movementData in
                 let elements = viewModel.categoryStoreElements.map { element -> ExpeditureSimpleCardModel in
                     let movementSum = movementData.first(where: { $0.id == element.id })?.sum ?? 0
-                    return ExpeditureSimpleCardModel(name: element.name,
+                    return ExpeditureSimpleCardModel(id: element.id,
+                                                     name: element.name,
                                                      amount: movementSum.currencyString,
                                                      systemImageName: element.icon,
                                                      imageTintColor: element.color)

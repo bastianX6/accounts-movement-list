@@ -37,7 +37,8 @@ enum DataPreview {
     }
 
     static func getSimpleCardModel(name: String, color: Color, amount: String) -> ExpeditureSimpleCardModel {
-        return ExpeditureSimpleCardModel(name: name,
+        return ExpeditureSimpleCardModel(id: UUID(),
+                                         name: name,
                                          amount: amount,
                                          systemImageName: "creditcard.fill",
                                          imageTintColor: color)
