@@ -12,6 +12,23 @@ import SwiftUI
 struct MovementDetailsView: View {
     let tintColor: Color
     let model: MovementDetailsModel
+    let isIncome: Bool
+
+    private var permanentMovementsTitle: String {
+        return self.isIncome ? L10n.permanentIncomes : L10n.permanentExpenses
+    }
+
+    private var otherMovementsTitle: String {
+        return self.isIncome ? L10n.otherIncomes : L10n.otherExpenses
+    }
+
+    private var summaryIcon: String {
+        return self.isIncome ? "dollarsign.square.fill" : "creditcard.fill"
+    }
+
+    private var permanentMovementsIcon: String {
+        return self.isIncome ? "bag.fill.badge.plus" : "dollarsign.circle.fill"
+    }
 
     var body: some View {
         ScrollView {
@@ -24,13 +41,13 @@ struct MovementDetailsView: View {
 
     private var summaryView: some View {
         VStack {
-            ListHeaderView(systemImageName: "creditcard.fill",
+            ListHeaderView(systemImageName: self.summaryIcon,
                            imageColor: self.tintColor,
                            title: L10n.summary)
 
             VStack(alignment: .leading) {
                 HStack {
-                    Text(L10n.permanentExpenses)
+                    Text(self.permanentMovementsTitle)
                         .frame(minWidth: 0,
                                maxWidth: .infinity,
                                alignment: .leading)
@@ -40,7 +57,7 @@ struct MovementDetailsView: View {
                                alignment: .trailing)
                 }
                 HStack {
-                    Text(L10n.otherExpenses)
+                    Text(self.otherMovementsTitle)
                         .frame(minWidth: 0,
                                maxWidth: .infinity,
                                alignment: .leading)
@@ -74,9 +91,9 @@ struct MovementDetailsView: View {
 
     private var permanentExpensesView: some View {
         VStack {
-            ListHeaderView(systemImageName: "dollarsign.circle.fill",
+            ListHeaderView(systemImageName: self.permanentMovementsIcon,
                            imageColor: self.tintColor,
-                           title: L10n.permanentExpenses)
+                           title: self.permanentMovementsTitle)
             ForEach(self.model.permanentMovements) { movementItem in
                 Text(movementItem.date.relativeDateString)
                     .frame(minWidth: 0,
@@ -94,7 +111,7 @@ struct MovementDetailsView: View {
         VStack {
             ListHeaderView(systemImageName: "bag.fill",
                            imageColor: self.tintColor,
-                           title: L10n.otherExpenses)
+                           title: self.otherMovementsTitle)
             ForEach(self.model.otherMovements) { movementItem in
                 Text(movementItem.date.relativeDateString)
                     .frame(minWidth: 0,
@@ -111,7 +128,13 @@ struct MovementDetailsView: View {
 
 struct MovementDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        MovementDetailsView(tintColor: .indigo,
-                            model: DataPreview.movementDetailsModel)
+        Group {
+            MovementDetailsView(tintColor: .indigo,
+                                model: DataPreview.movementDetailsModel,
+                                isIncome: false)
+            MovementDetailsView(tintColor: .indigo,
+                                model: DataPreview.movementDetailsModel,
+                                isIncome: true)
+        }
     }
 }

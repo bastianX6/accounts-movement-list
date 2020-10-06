@@ -14,8 +14,12 @@ internal enum L10n {
   internal static let multiPaymentExpenses = L10n.tr("Localizable", "Multi-payment expenses")
   /// Otros gastos
   internal static let otherExpenses = L10n.tr("Localizable", "Other expenses")
+  /// Otros ingresos
+  internal static let otherIncomes = L10n.tr("Localizable", "Other incomes")
   /// Gastos fijos
   internal static let permanentExpenses = L10n.tr("Localizable", "Permanent expenses")
+  /// Ingresos fijos
+  internal static let permanentIncomes = L10n.tr("Localizable", "Permanent incomes")
   /// Resumen
   internal static let summary = L10n.tr("Localizable", "Summary")
   /// Total
