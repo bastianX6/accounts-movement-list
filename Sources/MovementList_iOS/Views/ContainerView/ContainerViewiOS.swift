@@ -20,27 +20,26 @@ struct ContainerViewiOS: View {
     }
 
     var body: some View {
-        NavigationView {
-            self.currentView
-                .background(Color.systemGray6)
-                .fullBackgroundColor(.systemGray6)
-                .onAppear(perform: {
-                    self.viewModel.setState(.loading)
-                })
-                .navigationBarTitle(self.viewTitle)
-                .navigationBarItems(trailing: self.filterButton)
-                .navigationBarTitleDisplayMode(.inline)
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .sheet(isPresented: self.$viewModel.state.showFilterView,
-               onDismiss: {
-                   self.viewModel.setState(.loading)
-               },
-               content: {
-                   NavigationView {
-                       self.filterView
-                   }
-        })
+        self.currentView
+            .background(Color.systemGray6)
+            .fullBackgroundColor(.systemGray6)
+            .onAppear(perform: {
+                self.viewModel.setState(.loading)
+            })
+            .navigationBarTitle(self.viewTitle)
+            .navigationBarItems(trailing: self.filterButton)
+            .navigationBarTitleDisplayMode(.inline)
+            .wrapInNavigationViewIfNeeded()
+            .navigationViewStyle(StackNavigationViewStyle())
+            .sheet(isPresented: self.$viewModel.state.showFilterView,
+                   onDismiss: {
+                       self.viewModel.setState(.loading)
+                   },
+                   content: {
+                       NavigationView {
+                           self.filterView
+                       }
+            })
     }
 
     private var currentView: some View {
