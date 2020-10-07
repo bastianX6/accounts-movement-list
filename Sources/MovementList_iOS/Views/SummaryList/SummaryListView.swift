@@ -62,6 +62,7 @@ struct SummaryListView: View {
         return NavigationLink(destination: detailsContainerView) {
             ExpeditureSimpleCardView(model: model)
         }
+        .accentColor(Color.foregroundColor)
         .eraseToAnyView()
     }
 }
