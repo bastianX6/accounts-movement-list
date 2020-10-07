@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ContainerViewiOS: View {
     @ObservedObject var viewModel: MovementListViewModel
+    @EnvironmentObject var appAppearance: AppAppearance
 
     private var viewTitle: String {
         return self.viewModel.isIncome ? L10n.incomes : L10n.expenses
@@ -39,6 +40,7 @@ struct ContainerViewiOS: View {
                        NavigationView {
                            self.filterView
                        }
+                       .accentColor(self.appAppearance.accentColor)
             })
     }
 
