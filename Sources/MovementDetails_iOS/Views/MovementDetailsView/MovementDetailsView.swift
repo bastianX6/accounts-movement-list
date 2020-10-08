@@ -94,13 +94,18 @@ struct MovementDetailsView: View {
             ListHeaderView(systemImageName: self.permanentMovementsIcon,
                            imageColor: self.tintColor,
                            title: self.permanentMovementsTitle)
-            ForEach(self.model.permanentMovements) { movementItem in
-                Text(movementItem.date.relativeDateString)
-                    .frame(minWidth: 0,
-                           maxWidth: .infinity,
-                           alignment: .leading)
-                ForEach(movementItem.detailModels) { movement in
-                    ExpeditureDetailCardView(model: movement)
+
+            if self.model.permanentMovements.isEmpty {
+                Text(L10n.youDonTHaveMovements)
+            } else {
+                ForEach(self.model.permanentMovements) { movementItem in
+                    Text(movementItem.date.relativeDateString)
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               alignment: .leading)
+                    ForEach(movementItem.detailModels) { movement in
+                        ExpeditureDetailCardView(model: movement)
+                    }
                 }
             }
         }
@@ -112,13 +117,18 @@ struct MovementDetailsView: View {
             ListHeaderView(systemImageName: "bag.fill",
                            imageColor: self.tintColor,
                            title: self.otherMovementsTitle)
-            ForEach(self.model.otherMovements) { movementItem in
-                Text(movementItem.date.relativeDateString)
-                    .frame(minWidth: 0,
-                           maxWidth: .infinity,
-                           alignment: .leading)
-                ForEach(movementItem.detailModels) { movement in
-                    ExpeditureDetailCardView(model: movement)
+
+            if self.model.otherMovements.isEmpty {
+                Text(L10n.youDonTHaveMovements)
+            } else {
+                ForEach(self.model.otherMovements) { movementItem in
+                    Text(movementItem.date.relativeDateString)
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               alignment: .leading)
+                    ForEach(movementItem.detailModels) { movement in
+                        ExpeditureDetailCardView(model: movement)
+                    }
                 }
             }
         }
