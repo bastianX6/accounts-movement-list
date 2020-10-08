@@ -15,7 +15,9 @@ class MovementDetailLoadingState: MovementDetailViewState {
 
     var showErrorView: Bool = false
     var showLoadingView: Bool = true
+    var showEditMovementView: Bool = false
     var error: Error?
+    var selectedMovement: Movement?
 
     var cancellables: [AnyCancellable] = []
 
@@ -37,7 +39,7 @@ class MovementDetailLoadingState: MovementDetailViewState {
                                        categoryId: viewModel.dataModel.isIncome ? viewModel.dataModel.categoryStoreData.id : nil,
                                        paymentId: nil)
 
-        let cancellable = viewModel.dataModel.dataSource.readMovements(query: query)
+        let cancellable = viewModel.dataModel.dataSourceRead.readMovements(query: query)
             .receive(on: RunLoop.main)
             .sink { completion in
                 switch completion {
@@ -47,6 +49,7 @@ class MovementDetailLoadingState: MovementDetailViewState {
                     break
                 }
             } receiveValue: { movements in
+                viewModel.movements = movements
                 let model = MovementDetailsMapper.getModel(from: movements,
                                                            icon: viewModel.dataModel.categoryStoreData.icon,
                                                            tintColor: viewModel.dataModel.categoryStoreData.color)

@@ -39,9 +39,9 @@ class MovementListLoadingState: MovementListState {
         let publisher: AnyPublisher<[MovementsSum], Error>
 
         if viewModel.isIncome {
-            publisher = viewModel.readDataSource.getMovementSumByCategory(query: query)
+            publisher = viewModel.dataSourceRead.getMovementSumByCategory(query: query)
         } else {
-            publisher = viewModel.readDataSource.getMovementSumByStore(query: query)
+            publisher = viewModel.dataSourceRead.getMovementSumByStore(query: query)
         }
 
         let cancellable = publisher

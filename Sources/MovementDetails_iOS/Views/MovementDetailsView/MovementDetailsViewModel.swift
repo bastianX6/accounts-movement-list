@@ -14,9 +14,11 @@ import SwiftUI
 class MovementDetailsViewModel: ObservableObject {
     @Published var model: MovementDetailsModel
     @Published var state: MovementDetailViewState
+    var movements: [Movement] = []
 
     private let errorState = MovementDetailErrorState()
     private let withDataState = MovementDetailWithDataState()
+    private let editState = MovementDetailEditState()
     private let loadingState: MovementDetailLoadingState
 
     let dataModel: MovementDetailsDataModel
@@ -42,6 +44,11 @@ class MovementDetailsViewModel: ObservableObject {
             self.state = self.withDataState
         case .loading:
             self.state = self.loadingState
+        case let .editMovement(id):
+            let movement = self.movements.first(where: { $0.id == id })
+            self.editState.showEditMovementView = true
+            self.editState.selectedMovement = movement
+            self.state = self.editState
         }
     }
 }

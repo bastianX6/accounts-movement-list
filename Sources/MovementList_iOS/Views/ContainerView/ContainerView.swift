@@ -21,7 +21,8 @@ public struct ContainerView: View {
 
     /// View's body
     public var body: some View {
-        let viewModel = MovementListViewModel(readDataSource: self.dataModel.dataSource,
+        let viewModel = MovementListViewModel(dataSourceRead: self.dataModel.dataSourceRead,
+                                              dataSourceModify: self.dataModel.dataSourceModify,
                                               categoryStoreElements: self.categoryStoreElements,
                                               isIncome: self.dataModel.isIncome)
 
@@ -32,7 +33,8 @@ public struct ContainerView: View {
 struct ContainerView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContainerView(dataModel: MovementListDataModel(dataSource: MovementPreview(),
+            ContainerView(dataModel: MovementListDataModel(dataSourceRead: MovementPreview(),
+                                                           dataSourceModify: MovementPreview(),
                                                            resources: DataPreview.movementResources,
                                                            isIncome: false))
         }

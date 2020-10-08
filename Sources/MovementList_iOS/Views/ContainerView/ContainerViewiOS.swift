@@ -117,12 +117,14 @@ struct ContainerViewiOS_Previews: PreviewProvider {
         case fake
     }
 
-    @State static var viewModel = MovementListViewModel(readDataSource: MovementPreview(),
+    @State static var viewModel = MovementListViewModel(dataSourceRead: MovementPreview(),
+                                                        dataSourceModify: MovementPreview(),
                                                         categoryStoreElements: DataPreview.stores,
                                                         isIncome: false)
 
     @State static var viewModelWithErrorState: MovementListViewModel = {
-        let viewModel = MovementListViewModel(readDataSource: MovementPreview(),
+        let viewModel = MovementListViewModel(dataSourceRead: MovementPreview(),
+                                              dataSourceModify: MovementPreview(),
                                               categoryStoreElements: DataPreview.stores,
                                               isIncome: false)
         viewModel.setState(.error(error: FakeError.fake))

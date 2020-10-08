@@ -153,6 +153,7 @@ enum DataPreview {
     }
 
     static var dataModel: MovementDetailsDataModel {
+        let movementPreview = MovementPreview()
         let date1 = Date()
 
         let calendar = Calendar.current
@@ -160,7 +161,8 @@ enum DataPreview {
 
         return MovementDetailsDataModel(categoryStoreData: self.storeCategory,
                                         isIncome: false,
-                                        dataSource: MovementPreview(),
+                                        dataSourceRead: movementPreview,
+                                        dataSourceModify: movementPreview,
                                         fromDate: date2,
                                         toDate: date1)
     }

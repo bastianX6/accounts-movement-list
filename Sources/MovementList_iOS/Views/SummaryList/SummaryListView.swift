@@ -53,7 +53,8 @@ struct SummaryListView: View {
         }
         let dataModel = MovementDetailsDataModel(categoryStoreData: currentCategoryStore,
                                                  isIncome: self.viewModel.isIncome,
-                                                 dataSource: self.viewModel.readDataSource,
+                                                 dataSourceRead: self.viewModel.dataSourceRead,
+                                                 dataSourceModify: self.viewModel.dataSourceModify,
                                                  fromDate: fromDate,
                                                  toDate: toDate)
 
@@ -70,7 +71,8 @@ struct SummaryListView: View {
 struct SummaryListView_Previews: PreviewProvider {
     @State static var dataModel: SummaryListView.DataModel = DataPreview.summaryListDataModel
 
-    static var viewModel = MovementListViewModel(readDataSource: MovementPreview(),
+    static var viewModel = MovementListViewModel(dataSourceRead: MovementPreview(),
+                                                 dataSourceModify: MovementPreview(),
                                                  categoryStoreElements: DataPreview.stores,
                                                  isIncome: false)
     static var previews: some View {
