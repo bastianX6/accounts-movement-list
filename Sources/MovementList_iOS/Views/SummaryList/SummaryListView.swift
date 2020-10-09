@@ -46,8 +46,7 @@ struct SummaryListView: View {
     }
 
     func getNavigationLink(model: ExpeditureSimpleCardModel) -> some View {
-        guard let dataSourceModify = try? self.resolver.getDataSourceModify(forType: MovementListAvailability.self),
-            let fromDate = self.viewModel.filterDate.startOfMonth(),
+        guard let fromDate = self.viewModel.filterDate.startOfMonth(),
             let toDate = self.viewModel.filterDate.endOfMonth(),
             let currentCategoryStore = self.viewModel
             .categoryStoreElements
@@ -57,7 +56,6 @@ struct SummaryListView: View {
         let dataModel = MovementDetailsDataModel(categoryStoreData: currentCategoryStore,
                                                  isIncome: self.viewModel.isIncome,
                                                  dataSourceRead: self.viewModel.dataSourceRead,
-                                                 dataSourceModify: dataSourceModify,
                                                  fromDate: fromDate,
                                                  toDate: toDate)
 

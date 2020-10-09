@@ -162,7 +162,6 @@ enum DataPreview {
         return MovementDetailsDataModel(categoryStoreData: self.storeCategory,
                                         isIncome: false,
                                         dataSourceRead: movementPreview,
-                                        dataSourceModify: movementPreview,
                                         fromDate: date2,
                                         toDate: date1)
     }
