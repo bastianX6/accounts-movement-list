@@ -29,7 +29,6 @@ class MovementListViewModel: ObservableObject {
     }
 
     let dataSourceRead: DataSourceRead
-    let dataSourceModify: DataSourceModify
     let categoryStoreElements: [CategoryStoreModel]
     let isIncome: Bool
 
@@ -42,12 +41,10 @@ class MovementListViewModel: ObservableObject {
 
     init(filterDate: Date = Date(),
          dataSourceRead: DataSourceRead,
-         dataSourceModify: DataSourceModify,
          categoryStoreElements: [CategoryStoreModel],
          isIncome: Bool) {
         self.filterDate = filterDate
         self.dataSourceRead = dataSourceRead
-        self.dataSourceModify = dataSourceModify
         self.categoryStoreElements = categoryStoreElements
         self.isIncome = isIncome
         self.model = SummaryListView.DataModel()

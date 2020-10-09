@@ -6,11 +6,12 @@
 //
 
 import AccountsUI
+import DependencyResolver
 import SwiftUI
 
 struct ContainerViewiOS: View {
     @ObservedObject var viewModel: MovementListViewModel
-    @EnvironmentObject var appAppearance: AppAppearance
+    @EnvironmentObject var resolver: DependencyResolver
 
     private var viewTitle: String {
         return self.viewModel.isIncome ? L10n.incomes : L10n.expenses
@@ -40,7 +41,7 @@ struct ContainerViewiOS: View {
                        NavigationView {
                            self.filterView
                        }
-                       .accentColor(self.appAppearance.accentColor)
+                       .accentColor(self.resolver.appearance.accentColor)
             })
     }
 
@@ -118,13 +119,11 @@ struct ContainerViewiOS_Previews: PreviewProvider {
     }
 
     @State static var viewModel = MovementListViewModel(dataSourceRead: MovementPreview(),
-                                                        dataSourceModify: MovementPreview(),
                                                         categoryStoreElements: DataPreview.stores,
                                                         isIncome: false)
 
     @State static var viewModelWithErrorState: MovementListViewModel = {
         let viewModel = MovementListViewModel(dataSourceRead: MovementPreview(),
-                                              dataSourceModify: MovementPreview(),
                                               categoryStoreElements: DataPreview.stores,
                                               isIncome: false)
         viewModel.setState(.error(error: FakeError.fake))

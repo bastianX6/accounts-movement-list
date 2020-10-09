@@ -6,10 +6,12 @@
 //
 
 import AccountsUI
+import DependencyResolver
 import SwiftUI
 
 public struct ContainerView: View {
     private let dataModel: MovementListDataModel
+    @EnvironmentObject var resolver: DependencyResolver
 
     private var categoryStoreElements: [CategoryStoreModel] {
         return self.dataModel.isIncome ? self.dataModel.resources.categories : self.dataModel.resources.stores
@@ -21,8 +23,9 @@ public struct ContainerView: View {
 
     /// View's body
     public var body: some View {
+        self.resolver.setDataSourceAvailability(MovementListAvailability.movementList,
+                                                forType: MovementListAvailability.self)
         let viewModel = MovementListViewModel(dataSourceRead: self.dataModel.dataSourceRead,
-                                              dataSourceModify: self.dataModel.dataSourceModify,
                                               categoryStoreElements: self.categoryStoreElements,
                                               isIncome: self.dataModel.isIncome)
 
@@ -34,7 +37,6 @@ struct ContainerView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContainerView(dataModel: MovementListDataModel(dataSourceRead: MovementPreview(),
-                                                           dataSourceModify: MovementPreview(),
                                                            resources: DataPreview.movementResources,
                                                            isIncome: false))
         }
