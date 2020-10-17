@@ -55,9 +55,9 @@ class MovementListLoadingState: MovementListState {
                     viewModel.setState(.error(error: error))
                 }
             } receiveValue: { movementData in
-                let elements = viewModel.categoryStoreElements.map { element -> ExpeditureSimpleCardModel in
+                let elements = viewModel.categoryStoreElements.map { element -> MovementSimpleCardModel in
                     let movementSum = movementData.first(where: { $0.id == element.id })?.sum ?? 0
-                    return ExpeditureSimpleCardModel(id: element.id,
+                    return MovementSimpleCardModel(id: element.id,
                                                      name: element.name,
                                                      amount: movementSum.currencyString,
                                                      systemImageName: element.icon,

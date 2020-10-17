@@ -21,7 +21,7 @@ protocol MovementListState {
 
 enum MovementListStateEnum {
     case loading
-    case withData(elements: [ExpeditureSimpleCardModel])
+    case withData(elements: [MovementSimpleCardModel])
     case error(error: Error?)
     case filterByDate
 }

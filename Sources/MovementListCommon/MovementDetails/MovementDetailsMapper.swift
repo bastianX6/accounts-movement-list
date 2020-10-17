@@ -91,7 +91,7 @@ public enum MovementDetailsMapper {
                                        color: Color) -> [MovementDetailsItem] {
         let array = dict.map { date, movements -> MovementDetailsItem in
             let detailCardModel = movements.map {
-                ExpeditureDetailCardModel(id: $0.id,
+                MovementDetailCardModel(id: $0.id,
                                           systemImageName: icon,
                                           imageTintColor: color,
                                           title: $0.name,

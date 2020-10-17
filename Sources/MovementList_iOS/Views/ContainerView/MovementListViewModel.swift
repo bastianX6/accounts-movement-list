@@ -57,7 +57,7 @@ class MovementListViewModel: ObservableObject {
         self.loadingState.viewModel = self
     }
 
-    func updateDataModel(with elements: [ExpeditureSimpleCardModel]) {
+    func updateDataModel(with elements: [MovementSimpleCardModel]) {
         let month = self.filterDate.monthName
         let year = self.filterDate.yearName
         self.model = SummaryListView.DataModel(month: month, year: year, elements: elements)

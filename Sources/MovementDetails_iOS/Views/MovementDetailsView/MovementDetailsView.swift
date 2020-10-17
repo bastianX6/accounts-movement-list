@@ -136,9 +136,9 @@ struct MovementDetailsView: View {
         .padding()
     }
 
-    func getCardView(movement: ExpeditureDetailCardModel) -> some View {
+    func getCardView(movement: MovementDetailCardModel) -> some View {
         VStack {
-            ExpeditureDetailCardView(model: movement)
+            MovementDetailCardView(model: movement)
         }.onTapGesture(count: 1, perform: {
             self.viewModel.setState(.editMovement(id: movement.id))
         })

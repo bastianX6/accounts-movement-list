@@ -45,7 +45,7 @@ struct SummaryListView: View {
         }
     }
 
-    func getNavigationLink(model: ExpeditureSimpleCardModel) -> some View {
+    func getNavigationLink(model: MovementSimpleCardModel) -> some View {
         guard let fromDate = self.viewModel.filterDate.startOfMonth(),
             let toDate = self.viewModel.filterDate.endOfMonth(),
             let currentCategoryStore = self.viewModel
@@ -62,7 +62,7 @@ struct SummaryListView: View {
         let detailsContainerView = MovementDetails_iOS.ContainerView(dataModel: dataModel)
 
         return NavigationLink(destination: detailsContainerView) {
-            ExpeditureSimpleCardView(model: model)
+            MovementSimpleCardView(model: model)
         }
         .accentColor(Color.foregroundColor)
         .eraseToAnyView()

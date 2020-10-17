@@ -16,14 +16,14 @@ public struct MovementDetailsItem: Identifiable {
     public let date: Date
 
     /// Array of `ExpeditureDetailCardModel` with movement details
-    public let detailModels: [ExpeditureDetailCardModel]
+    public let detailModels: [MovementDetailCardModel]
 
     /// Default initializer
     /// - Parameters:
     ///   - date: Movement date. It's the same for all movements
     ///   - detailModels: Array of `ExpeditureDetailCardModel` with movement details
     public init(date: Date,
-                detailModels: [ExpeditureDetailCardModel]) {
+                detailModels: [MovementDetailCardModel]) {
         self.date = date
         self.detailModels = detailModels
     }
