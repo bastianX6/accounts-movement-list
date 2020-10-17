@@ -89,9 +89,11 @@ struct ContainerViewiOS: View {
                                                  incomeData: incomeData,
                                                  expeditureData: expeditureData)
 
-        return NewMovement_iOS.ContainerView(dataModel: dataModel,
-                                             movement: movement)
-            .eraseToAnyView()
+        return NewMovement_iOS.NewMovementView(dataModel: dataModel,
+                                               movement: movement,
+                                               isIncome: self.viewModel.dataModel.isIncome) {
+            self.viewModel.setState(.loading)
+        }.eraseToAnyView()
     }
 }
 
