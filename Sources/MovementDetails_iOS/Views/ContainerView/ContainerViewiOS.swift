@@ -81,13 +81,13 @@ struct ContainerViewiOS: View {
         guard let movement = self.viewModel.state.selectedMovement,
             let dataSourceModify = try? self.resolver.getDataSourceModify(forType: MovementDetailsAvailability.self),
             let incomeData = try? self.resolver.getIncomeResources(forType: MovementDetailsAvailability.self),
-            let expeditureData = try? self.resolver.getExpeditureResources(forType: MovementDetailsAvailability.self) else {
+            let expenditureData = try? self.resolver.getExpenditureResources(forType: MovementDetailsAvailability.self) else {
             return Text("").eraseToAnyView()
         }
 
         let dataModel = NewMovementViewDataModel(dataSource: dataSourceModify,
                                                  incomeData: incomeData,
-                                                 expeditureData: expeditureData)
+                                                 expenditureData: expenditureData)
 
         return NewMovement_iOS.NewMovementView(dataModel: dataModel,
                                                movement: movement,

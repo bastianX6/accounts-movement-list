@@ -17,8 +17,8 @@ public enum MovementDetailsMapper {
 
      - Parameters:
         - movements: Movements information
-        - icon: System icon name (used by `ExpeditureDetailCardModel`)
-        - tintColor: Icon tint color (used by `ExpeditureDetailCardModel`)
+        - icon: System icon name (used by `MovementDetailCardModel`)
+        - tintColor: Icon tint color (used by `MovementDetailCardModel`)
 
      - Returns: A instance of `MovementsDetailsModel`
      */
@@ -83,8 +83,8 @@ public enum MovementDetailsMapper {
     /// Maps a dictionary to an array of `MovementDetailsItem`
     /// - Parameters:
     ///   - dict: grouped dictionary (obtained from `getGroupedDictionary` method)
-    ///   - icon: System icon name (used by `ExpeditureDetailCardModel`)
-    ///   - color: con tint color (used by `ExpeditureDetailCardModel`)
+    ///   - icon: System icon name (used by `MovementDetailCardModel`)
+    ///   - color: con tint color (used by `MovementDetailCardModel`)
     /// - Returns: An array of `MovementDetailsItem` elements
     static func getArrayFromDictionary(_ dict: [Date: [Movement]],
                                        icon: String,
