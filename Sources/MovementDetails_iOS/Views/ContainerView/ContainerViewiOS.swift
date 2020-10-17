@@ -6,10 +6,13 @@
 //
 
 import AccountsUI
+import DependencyResolver
+import NewMovement_iOS
 import SwiftUI
 
 struct ContainerViewiOS: View {
     @ObservedObject var viewModel: MovementDetailsViewModel
+    @EnvironmentObject var resolver: DependencyResolver
 
     private var viewTitle: String {
         return self.viewModel.dataModel.categoryStoreData.name
@@ -62,9 +65,33 @@ struct ContainerViewiOS: View {
     }
 
     private var movementDetailsView: some View {
-        MovementDetailsView(model: self.$viewModel.model,
-                            tintColor: self.viewModel.dataModel.categoryStoreData.color,
-                            isIncome: self.viewModel.dataModel.isIncome)
+        VStack {
+            MovementDetailsView(model: self.$viewModel.model,
+                                viewModel: self.viewModel,
+                                tintColor: self.viewModel.dataModel.categoryStoreData.color,
+                                isIncome: self.viewModel.dataModel.isIncome)
+        }
+        .sheet(isPresented: self.$viewModel.state.showEditMovementView,
+               content: {
+                   self.editView
+        })
+    }
+
+    var editView: some View {
+        guard let movement = self.viewModel.state.selectedMovement,
+            let dataSourceModify = try? self.resolver.getDataSourceModify(forType: MovementDetailsAvailability.self),
+            let incomeData = try? self.resolver.getIncomeResources(forType: MovementDetailsAvailability.self),
+            let expeditureData = try? self.resolver.getExpeditureResources(forType: MovementDetailsAvailability.self) else {
+            return Text("").eraseToAnyView()
+        }
+
+        let dataModel = NewMovementViewDataModel(dataSource: dataSourceModify,
+                                                 incomeData: incomeData,
+                                                 expeditureData: expeditureData)
+
+        return NewMovement_iOS.ContainerView(dataModel: dataModel,
+                                             movement: movement)
+            .eraseToAnyView()
     }
 }
 

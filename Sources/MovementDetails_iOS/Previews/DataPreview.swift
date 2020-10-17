@@ -102,6 +102,10 @@ enum DataPreview {
                                               tintColor: .indigo)
     }
 
+    static var movementDetailsViewModel: MovementDetailsViewModel {
+        return MovementDetailsViewModel(dataModel: self.dataModel)
+    }
+
     private struct PreviewMovement: Movement {
         var id: UUID = UUID()
         var name: String = ""

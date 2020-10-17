@@ -11,6 +11,7 @@ import SwiftUI
 
 struct MovementDetailsView: View {
     @Binding var model: MovementDetailsModel
+    let viewModel: MovementDetailsViewModel
     let tintColor: Color
     let isIncome: Bool
 
@@ -104,7 +105,7 @@ struct MovementDetailsView: View {
                                maxWidth: .infinity,
                                alignment: .leading)
                     ForEach(movementItem.detailModels) { movement in
-                        ExpeditureDetailCardView(model: movement)
+                        self.getCardView(movement: movement)
                     }
                 }
             }
@@ -127,12 +128,20 @@ struct MovementDetailsView: View {
                                maxWidth: .infinity,
                                alignment: .leading)
                     ForEach(movementItem.detailModels) { movement in
-                        ExpeditureDetailCardView(model: movement)
+                        self.getCardView(movement: movement)
                     }
                 }
             }
         }
         .padding()
+    }
+
+    func getCardView(movement: ExpeditureDetailCardModel) -> some View {
+        VStack {
+            ExpeditureDetailCardView(model: movement)
+        }.onTapGesture(count: 1, perform: {
+            self.viewModel.setState(.editMovement(id: movement.id))
+        })
     }
 }
 
@@ -142,9 +151,11 @@ struct MovementDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             MovementDetailsView(model: self.$model,
+                                viewModel: DataPreview.movementDetailsViewModel,
                                 tintColor: .indigo,
                                 isIncome: false)
             MovementDetailsView(model: self.$model,
+                                viewModel: DataPreview.movementDetailsViewModel,
                                 tintColor: .indigo,
                                 isIncome: true)
         }

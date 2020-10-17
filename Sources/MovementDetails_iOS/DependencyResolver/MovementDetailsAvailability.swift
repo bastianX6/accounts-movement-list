@@ -22,3 +22,14 @@ extension MovementDetailsAvailability: DataSourceAvailability {
         }
     }
 }
+
+extension MovementDetailsAvailability: ResourcesAvailability {
+    public func availability(for type: ResourceType) -> Bool {
+        switch type {
+        case .incomesData:
+            return true
+        case .expensesData:
+            return true
+        }
+    }
+}

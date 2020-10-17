@@ -21,6 +21,8 @@ public struct ContainerView: View {
     public var body: some View {
         self.resolver.setDataSourceAvailability(MovementDetailsAvailability.movementDetails,
                                                 forType: MovementDetailsAvailability.self)
+        self.resolver.setResourcesAvailability(MovementDetailsAvailability.movementDetails,
+                                                forType: MovementDetailsAvailability.self)
         let viewModel = MovementDetailsViewModel(dataModel: self.dataModel)
 
         return ContainerViewiOS(viewModel: viewModel)

@@ -44,8 +44,8 @@ public enum MovementDetailsMapper {
                                                              color: tintColor)
 
         return MovementDetailsModel(summary: summary,
-                                     permanentMovements: permanentsMovementItems,
-                                     otherMovements: otherMovementItems)
+                                    permanentMovements: permanentsMovementItems,
+                                    otherMovements: otherMovementItems)
     }
 
     /// Get a summary of movements
@@ -91,7 +91,8 @@ public enum MovementDetailsMapper {
                                        color: Color) -> [MovementDetailsItem] {
         let array = dict.map { date, movements -> MovementDetailsItem in
             let detailCardModel = movements.map {
-                ExpeditureDetailCardModel(systemImageName: icon,
+                ExpeditureDetailCardModel(id: $0.id,
+                                          systemImageName: icon,
                                           imageTintColor: color,
                                           title: $0.name,
                                           description: $0.description,
