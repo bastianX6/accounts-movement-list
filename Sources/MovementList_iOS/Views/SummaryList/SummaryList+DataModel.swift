@@ -14,12 +14,12 @@ extension SummaryListView {
         let id: UUID
         let month: String
         let year: String
-        let elements: [ExpeditureSimpleCardModel]
+        let elements: [MovementSimpleCardModel]
 
         init(id: UUID = UUID(),
              month: String = "",
              year: String = "",
-             elements: [ExpeditureSimpleCardModel] = []) {
+             elements: [MovementSimpleCardModel] = []) {
             self.id = id
             self.month = month
             self.year = year

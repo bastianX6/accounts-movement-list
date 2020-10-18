@@ -28,7 +28,7 @@ class MovementListViewModel: ObservableObject {
         }
     }
 
-    let readDataSource: DataSourceRead
+    let dataSourceRead: DataSourceRead
     let categoryStoreElements: [CategoryStoreModel]
     let isIncome: Bool
 
@@ -40,11 +40,11 @@ class MovementListViewModel: ObservableObject {
     private lazy var filterByDateState = MovementListFilterByDateState(viewModel: self)
 
     init(filterDate: Date = Date(),
-         readDataSource: DataSourceRead,
+         dataSourceRead: DataSourceRead,
          categoryStoreElements: [CategoryStoreModel],
          isIncome: Bool) {
         self.filterDate = filterDate
-        self.readDataSource = readDataSource
+        self.dataSourceRead = dataSourceRead
         self.categoryStoreElements = categoryStoreElements
         self.isIncome = isIncome
         self.model = SummaryListView.DataModel()
@@ -57,7 +57,7 @@ class MovementListViewModel: ObservableObject {
         self.loadingState.viewModel = self
     }
 
-    func updateDataModel(with elements: [ExpeditureSimpleCardModel]) {
+    func updateDataModel(with elements: [MovementSimpleCardModel]) {
         let month = self.filterDate.monthName
         let year = self.filterDate.yearName
         self.model = SummaryListView.DataModel(month: month, year: year, elements: elements)

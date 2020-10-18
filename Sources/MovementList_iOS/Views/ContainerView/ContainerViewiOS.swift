@@ -6,10 +6,12 @@
 //
 
 import AccountsUI
+import DependencyResolver
 import SwiftUI
 
 struct ContainerViewiOS: View {
     @ObservedObject var viewModel: MovementListViewModel
+    @EnvironmentObject var resolver: DependencyResolver
 
     private var viewTitle: String {
         return self.viewModel.isIncome ? L10n.incomes : L10n.expenses
@@ -20,25 +22,27 @@ struct ContainerViewiOS: View {
     }
 
     var body: some View {
-        NavigationView {
-            self.currentView
-                .background(Color.systemGray6)
-                .onAppear(perform: {
-                    self.viewModel.setState(.loading)
-                })
-                .navigationBarTitle(self.viewTitle)
-                .navigationBarItems(trailing: self.filterButton)
-                .navigationBarTitleDisplayMode(.inline)
-        }
-        .sheet(isPresented: self.$viewModel.state.showFilterView,
-               onDismiss: {
-                   self.viewModel.setState(.loading)
-               },
-               content: {
-                   NavigationView {
-                       self.filterView
-                   }
-        })
+        self.currentView
+            .background(Color.systemGray6)
+            .fullBackgroundColor(.systemGray6)
+            .onAppear(perform: {
+                self.viewModel.setState(.loading)
+            })
+            .navigationBarTitle(self.viewTitle)
+            .navigationBarItems(trailing: self.filterButton)
+            .navigationBarTitleDisplayMode(.inline)
+            .wrapInNavigationViewIfNeeded()
+            .navigationViewStyle(StackNavigationViewStyle())
+            .sheet(isPresented: self.$viewModel.state.showFilterView,
+                   onDismiss: {
+                       self.viewModel.setState(.loading)
+                   },
+                   content: {
+                       NavigationView {
+                           self.filterView
+                       }
+                       .accentColor(self.resolver.appearance.accentColor)
+            })
     }
 
     private var currentView: some View {
@@ -114,12 +118,12 @@ struct ContainerViewiOS_Previews: PreviewProvider {
         case fake
     }
 
-    @State static var viewModel = MovementListViewModel(readDataSource: MovementPreview(),
+    @State static var viewModel = MovementListViewModel(dataSourceRead: MovementPreview(),
                                                         categoryStoreElements: DataPreview.stores,
                                                         isIncome: false)
 
     @State static var viewModelWithErrorState: MovementListViewModel = {
-        let viewModel = MovementListViewModel(readDataSource: MovementPreview(),
+        let viewModel = MovementListViewModel(dataSourceRead: MovementPreview(),
                                               categoryStoreElements: DataPreview.stores,
                                               isIncome: false)
         viewModel.setState(.error(error: FakeError.fake))

@@ -39,9 +39,9 @@ class MovementListLoadingState: MovementListState {
         let publisher: AnyPublisher<[MovementsSum], Error>
 
         if viewModel.isIncome {
-            publisher = viewModel.readDataSource.getMovementSumByCategory(query: query)
+            publisher = viewModel.dataSourceRead.getMovementSumByCategory(query: query)
         } else {
-            publisher = viewModel.readDataSource.getMovementSumByStore(query: query)
+            publisher = viewModel.dataSourceRead.getMovementSumByStore(query: query)
         }
 
         let cancellable = publisher
@@ -55,9 +55,9 @@ class MovementListLoadingState: MovementListState {
                     viewModel.setState(.error(error: error))
                 }
             } receiveValue: { movementData in
-                let elements = viewModel.categoryStoreElements.map { element -> ExpeditureSimpleCardModel in
+                let elements = viewModel.categoryStoreElements.map { element -> MovementSimpleCardModel in
                     let movementSum = movementData.first(where: { $0.id == element.id })?.sum ?? 0
-                    return ExpeditureSimpleCardModel(id: element.id,
+                    return MovementSimpleCardModel(id: element.id,
                                                      name: element.name,
                                                      amount: movementSum.currencyString,
                                                      systemImageName: element.icon,

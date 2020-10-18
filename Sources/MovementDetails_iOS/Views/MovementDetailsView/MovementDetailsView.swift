@@ -11,6 +11,7 @@ import SwiftUI
 
 struct MovementDetailsView: View {
     @Binding var model: MovementDetailsModel
+    let viewModel: MovementDetailsViewModel
     let tintColor: Color
     let isIncome: Bool
 
@@ -94,13 +95,18 @@ struct MovementDetailsView: View {
             ListHeaderView(systemImageName: self.permanentMovementsIcon,
                            imageColor: self.tintColor,
                            title: self.permanentMovementsTitle)
-            ForEach(self.model.permanentMovements) { movementItem in
-                Text(movementItem.date.relativeDateString)
-                    .frame(minWidth: 0,
-                           maxWidth: .infinity,
-                           alignment: .leading)
-                ForEach(movementItem.detailModels) { movement in
-                    ExpeditureDetailCardView(model: movement)
+
+            if self.model.permanentMovements.isEmpty {
+                Text(L10n.youDonTHaveMovements)
+            } else {
+                ForEach(self.model.permanentMovements) { movementItem in
+                    Text(movementItem.date.relativeDateString)
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               alignment: .leading)
+                    ForEach(movementItem.detailModels) { movement in
+                        self.getCardView(movement: movement)
+                    }
                 }
             }
         }
@@ -112,17 +118,30 @@ struct MovementDetailsView: View {
             ListHeaderView(systemImageName: "bag.fill",
                            imageColor: self.tintColor,
                            title: self.otherMovementsTitle)
-            ForEach(self.model.otherMovements) { movementItem in
-                Text(movementItem.date.relativeDateString)
-                    .frame(minWidth: 0,
-                           maxWidth: .infinity,
-                           alignment: .leading)
-                ForEach(movementItem.detailModels) { movement in
-                    ExpeditureDetailCardView(model: movement)
+
+            if self.model.otherMovements.isEmpty {
+                Text(L10n.youDonTHaveMovements)
+            } else {
+                ForEach(self.model.otherMovements) { movementItem in
+                    Text(movementItem.date.relativeDateString)
+                        .frame(minWidth: 0,
+                               maxWidth: .infinity,
+                               alignment: .leading)
+                    ForEach(movementItem.detailModels) { movement in
+                        self.getCardView(movement: movement)
+                    }
                 }
             }
         }
         .padding()
+    }
+
+    func getCardView(movement: MovementDetailCardModel) -> some View {
+        VStack {
+            MovementDetailCardView(model: movement)
+        }.onTapGesture(count: 1, perform: {
+            self.viewModel.setState(.editMovement(id: movement.id))
+        })
     }
 }
 
@@ -132,9 +151,11 @@ struct MovementDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             MovementDetailsView(model: self.$model,
+                                viewModel: DataPreview.movementDetailsViewModel,
                                 tintColor: .indigo,
                                 isIncome: false)
             MovementDetailsView(model: self.$model,
+                                viewModel: DataPreview.movementDetailsViewModel,
                                 tintColor: .indigo,
                                 isIncome: true)
         }

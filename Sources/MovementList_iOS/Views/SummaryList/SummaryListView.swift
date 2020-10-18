@@ -6,11 +6,13 @@
 //
 
 import AccountsUI
+import DependencyResolver
 import MovementDetails_iOS
 import SwiftUI
 
 struct SummaryListView: View {
     @Binding var dataModel: SummaryListView.DataModel
+    @EnvironmentObject var resolver: DependencyResolver
     let viewModel: MovementListViewModel
 
     private var headerTitle: String {
@@ -43,7 +45,7 @@ struct SummaryListView: View {
         }
     }
 
-    func getNavigationLink(model: ExpeditureSimpleCardModel) -> some View {
+    func getNavigationLink(model: MovementSimpleCardModel) -> some View {
         guard let fromDate = self.viewModel.filterDate.startOfMonth(),
             let toDate = self.viewModel.filterDate.endOfMonth(),
             let currentCategoryStore = self.viewModel
@@ -53,15 +55,16 @@ struct SummaryListView: View {
         }
         let dataModel = MovementDetailsDataModel(categoryStoreData: currentCategoryStore,
                                                  isIncome: self.viewModel.isIncome,
-                                                 dataSource: self.viewModel.readDataSource,
+                                                 dataSourceRead: self.viewModel.dataSourceRead,
                                                  fromDate: fromDate,
                                                  toDate: toDate)
 
         let detailsContainerView = MovementDetails_iOS.ContainerView(dataModel: dataModel)
 
         return NavigationLink(destination: detailsContainerView) {
-            ExpeditureSimpleCardView(model: model)
+            MovementSimpleCardView(model: model)
         }
+        .accentColor(Color.foregroundColor)
         .eraseToAnyView()
     }
 }
@@ -69,7 +72,7 @@ struct SummaryListView: View {
 struct SummaryListView_Previews: PreviewProvider {
     @State static var dataModel: SummaryListView.DataModel = DataPreview.summaryListDataModel
 
-    static var viewModel = MovementListViewModel(readDataSource: MovementPreview(),
+    static var viewModel = MovementListViewModel(dataSourceRead: MovementPreview(),
                                                  categoryStoreElements: DataPreview.stores,
                                                  isIncome: false)
     static var previews: some View {

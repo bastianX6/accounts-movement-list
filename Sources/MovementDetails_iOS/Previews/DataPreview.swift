@@ -14,8 +14,8 @@ import SwiftUI
 enum DataPreview {
     // MARK: - Simple card model previews
 
-    static var simpleCardModelArray: [ExpeditureSimpleCardModel] {
-        var array = [ExpeditureSimpleCardModel]()
+    static var simpleCardModelArray: [MovementSimpleCardModel] {
+        var array = [MovementSimpleCardModel]()
 
         array.append(self.getSimpleCardModel(name: "Falabella",
                                              color: .green,
@@ -36,8 +36,8 @@ enum DataPreview {
         return array
     }
 
-    static func getSimpleCardModel(name: String, color: Color, amount: String) -> ExpeditureSimpleCardModel {
-        return ExpeditureSimpleCardModel(id: UUID(),
+    static func getSimpleCardModel(name: String, color: Color, amount: String) -> MovementSimpleCardModel {
+        return MovementSimpleCardModel(id: UUID(),
                                          name: name,
                                          amount: amount,
                                          systemImageName: "creditcard.fill",
@@ -102,6 +102,10 @@ enum DataPreview {
                                               tintColor: .indigo)
     }
 
+    static var movementDetailsViewModel: MovementDetailsViewModel {
+        return MovementDetailsViewModel(dataModel: self.dataModel)
+    }
+
     private struct PreviewMovement: Movement {
         var id: UUID = UUID()
         var name: String = ""
@@ -153,6 +157,7 @@ enum DataPreview {
     }
 
     static var dataModel: MovementDetailsDataModel {
+        let movementPreview = MovementPreview()
         let date1 = Date()
 
         let calendar = Calendar.current
@@ -160,7 +165,7 @@ enum DataPreview {
 
         return MovementDetailsDataModel(categoryStoreData: self.storeCategory,
                                         isIncome: false,
-                                        dataSource: MovementPreview(),
+                                        dataSourceRead: movementPreview,
                                         fromDate: date2,
                                         toDate: date1)
     }

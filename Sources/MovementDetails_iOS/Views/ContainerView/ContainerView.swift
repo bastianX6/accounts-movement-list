@@ -6,10 +6,12 @@
 //
 
 import AccountsUI
+import DependencyResolver
 import SwiftUI
 
 public struct ContainerView: View {
     private let dataModel: MovementDetailsDataModel
+    @EnvironmentObject var resolver: DependencyResolver
 
     public init(dataModel: MovementDetailsDataModel) {
         self.dataModel = dataModel
@@ -17,6 +19,10 @@ public struct ContainerView: View {
 
     /// View's body
     public var body: some View {
+        self.resolver.setDataSourceAvailability(MovementDetailsAvailability.movementDetails,
+                                                forType: MovementDetailsAvailability.self)
+        self.resolver.setResourcesAvailability(MovementDetailsAvailability.movementDetails,
+                                                forType: MovementDetailsAvailability.self)
         let viewModel = MovementDetailsViewModel(dataModel: self.dataModel)
 
         return ContainerViewiOS(viewModel: viewModel)

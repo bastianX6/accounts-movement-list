@@ -14,7 +14,7 @@ import SwiftUI
 public struct MovementDetailsDataModel {
     let categoryStoreData: CategoryStoreModel
     let isIncome: Bool
-    let dataSource: DataSourceRead
+    let dataSourceRead: DataSourceRead
     let fromDate: Date
     let toDate: Date
 
@@ -22,17 +22,17 @@ public struct MovementDetailsDataModel {
     /// - Parameters:
     ///   - categoryStoreData: category / store information
     ///   - isIncome: used to check is managed data is for incomes or expenses
-    ///   - dataSource: `DataSourceRead` instance used to get movements for the given category / store
+    ///   - dataSourceRead: `DataSourceRead` instance used to get movements for the given category / store
     ///   - fromDate: starting date to query movements
     ///   - toDate: ending date to query movements
     public init(categoryStoreData: CategoryStoreModel,
                 isIncome: Bool,
-                dataSource: DataSourceRead,
+                dataSourceRead: DataSourceRead,
                 fromDate: Date,
                 toDate: Date) {
         self.categoryStoreData = categoryStoreData
         self.isIncome = isIncome
-        self.dataSource = dataSource
+        self.dataSourceRead = dataSourceRead
         self.fromDate = fromDate
         self.toDate = toDate
     }

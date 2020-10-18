@@ -27,13 +27,20 @@ let package = Package(
         .package(name: "AccountsUI",
                  url: "https://github.com/bastianX6/accounts-ui.git",
                  from: "1.0.2"),
+        .package(name: "NewMovement",
+                 url: "https://github.com/bastianX6/accounts-new-movement.git",
+                 from: "1.0.0"),
+        .package(name: "DependencyResolver",
+                 url: "https://github.com/bastianX6/accounts-dependency-resolver",
+                 from: "1.0.0"),
     ],
     targets: [
         .target(
             name: "MovementListCommon",
             dependencies: [
                 "DataManagement",
-                "AccountsUI"
+                "AccountsUI",
+                "DependencyResolver"
             ],
             resources: [.process("Resources")]
         ),
@@ -52,7 +59,8 @@ let package = Package(
             dependencies: [
                 "DataManagement",
                 "AccountsUI",
-                "MovementListCommon"
+                "MovementListCommon",
+                .product(name: "NewMovement_iOS", package: "NewMovement")
             ],
             resources: [.process("Resources")]
         ),

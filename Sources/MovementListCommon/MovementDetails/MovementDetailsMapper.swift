@@ -17,8 +17,8 @@ public enum MovementDetailsMapper {
 
      - Parameters:
         - movements: Movements information
-        - icon: System icon name (used by `ExpeditureDetailCardModel`)
-        - tintColor: Icon tint color (used by `ExpeditureDetailCardModel`)
+        - icon: System icon name (used by `MovementDetailCardModel`)
+        - tintColor: Icon tint color (used by `MovementDetailCardModel`)
 
      - Returns: A instance of `MovementsDetailsModel`
      */
@@ -44,8 +44,8 @@ public enum MovementDetailsMapper {
                                                              color: tintColor)
 
         return MovementDetailsModel(summary: summary,
-                                     permanentMovements: permanentsMovementItems,
-                                     otherMovements: otherMovementItems)
+                                    permanentMovements: permanentsMovementItems,
+                                    otherMovements: otherMovementItems)
     }
 
     /// Get a summary of movements
@@ -83,15 +83,16 @@ public enum MovementDetailsMapper {
     /// Maps a dictionary to an array of `MovementDetailsItem`
     /// - Parameters:
     ///   - dict: grouped dictionary (obtained from `getGroupedDictionary` method)
-    ///   - icon: System icon name (used by `ExpeditureDetailCardModel`)
-    ///   - color: con tint color (used by `ExpeditureDetailCardModel`)
+    ///   - icon: System icon name (used by `MovementDetailCardModel`)
+    ///   - color: con tint color (used by `MovementDetailCardModel`)
     /// - Returns: An array of `MovementDetailsItem` elements
     static func getArrayFromDictionary(_ dict: [Date: [Movement]],
                                        icon: String,
                                        color: Color) -> [MovementDetailsItem] {
         let array = dict.map { date, movements -> MovementDetailsItem in
             let detailCardModel = movements.map {
-                ExpeditureDetailCardModel(systemImageName: icon,
+                MovementDetailCardModel(id: $0.id,
+                                          systemImageName: icon,
                                           imageTintColor: color,
                                           title: $0.name,
                                           description: $0.description,
