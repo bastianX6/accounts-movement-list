@@ -32,7 +32,7 @@ let package = Package(
                  from: "1.0.0"),
         .package(name: "DependencyResolver",
                  url: "https://github.com/bastianX6/accounts-dependency-resolver",
-                 from: "0.1.0"),
+                 from: "1.0.0"),
     ],
     targets: [
         .target(
