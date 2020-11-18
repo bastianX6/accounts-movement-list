@@ -37,6 +37,7 @@ xcuserdata
 DerivedData/
 *.xcodeproj
 .swiftpm
+**/*.resolved
 
 
 ### SwiftPM ###

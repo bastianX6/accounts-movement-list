@@ -14,59 +14,29 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "MovementList_iOS",
-            targets: ["MovementList_iOS"]),
-        .library(
-            name: "MovementDetails_iOS",
-            targets: ["MovementDetails_iOS"]),
+            name: "MovementList",
+            targets: ["MovementList"]
+        )
     ],
     dependencies: [
-        .package(name: "DataManagement",
-                 url: "https://github.com/bastianX6/accounts-data-management.git",
-                 from: "1.0.1"),
-        .package(name: "AccountsUI",
-                 url: "https://github.com/bastianX6/accounts-ui.git",
-                 from: "1.0.2"),
-        .package(name: "NewMovement",
-                 url: "https://github.com/bastianX6/accounts-new-movement.git",
-                 from: "1.0.0"),
-        .package(name: "DependencyResolver",
-                 url: "https://github.com/bastianX6/accounts-dependency-resolver",
-                 from: "1.0.0"),
+        .package(path: "./MovementList_iOS"),
+        .package(path: "./MovementDetails_iOS")
     ],
     targets: [
         .target(
-            name: "MovementListCommon",
+            name: "MovementList",
             dependencies: [
-                "DataManagement",
-                "AccountsUI",
-                "DependencyResolver"
-            ],
-            resources: [.process("Resources")]
-        ),
-        .target(
-            name: "MovementList_iOS",
-            dependencies: [
-                "DataManagement",
-                "AccountsUI",
-                "MovementListCommon",
-                "MovementDetails_iOS"
-            ],
-            resources: [.process("Resources")]
-        ),
-        .target(
-            name: "MovementDetails_iOS",
-            dependencies: [
-                "DataManagement",
-                "AccountsUI",
-                "MovementListCommon",
-                .product(name: "NewMovement_iOS", package: "NewMovement")
-            ],
-            resources: [.process("Resources")]
-        ),
-        .testTarget(
-            name: "MovementListCommonTests",
-            dependencies: ["MovementListCommon"]
+                .product(
+                    name: "MovementList_iOS",
+                    package: "MovementList_iOS",
+                    condition: .when(platforms: [.iOS])
+                ),
+                .product(
+                    name: "MovementDetails_iOS",
+                    package: "MovementDetails_iOS",
+                    condition: .when(platforms: [.iOS])
+                )
+            ]
         )
     ]
 )
