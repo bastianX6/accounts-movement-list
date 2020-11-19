@@ -40,5 +40,9 @@ let package = Package(
             ],
             resources: [.process("Resources")]
         ),
+        .testTarget(
+            name: "MovementList_iOSTests",
+            dependencies: ["MovementList_iOS"]
+        )
     ]
 )

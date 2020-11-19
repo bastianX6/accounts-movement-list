@@ -20,7 +20,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "./MovementList_iOS"),
-        .package(path: "./MovementDetails_iOS")
+        .package(path: "./MovementDetails_iOS"),
     ],
     targets: [
         .target(

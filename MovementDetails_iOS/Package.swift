@@ -28,7 +28,7 @@ let package = Package(
         .package(name: "DependencyResolver",
                  url: "https://github.com/bastianX6/accounts-dependency-resolver",
                  from: "1.0.0"),
-        .package(path: "../MovementListCommon")
+        .package(path: "../MovementListCommon"),
     ],
     targets: [
         .target(
@@ -41,6 +41,10 @@ let package = Package(
                 .product(name: "NewMovement_iOS", package: "NewMovement")
             ],
             resources: [.process("Resources")]
+        ),
+        .testTarget(
+            name: "MovementDetails_iOSTests",
+            dependencies: ["MovementDetails_iOS"]
         )
     ]
 )

@@ -35,8 +35,7 @@ let package = Package(
         ),
         .testTarget(
             name: "MovementListCommonTests",
-            dependencies: ["MovementListCommon"],
-            path: "Tests"
+            dependencies: ["MovementListCommon"]
         )
     ]
 )
