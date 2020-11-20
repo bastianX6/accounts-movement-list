@@ -10,28 +10,24 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-  /// Cancelar
-  internal static let cancel = L10n.tr("Localizable", "Cancel")
   /// No pudimos obtener la información
   internal static let coulndTLoadYourData = L10n.tr("Localizable", "Coulnd't load your data")
-  /// Gastos
-  internal static let expenses = L10n.tr("Localizable", "Expenses")
-  /// Gastos de %@ - %@
-  internal static func expensesOf(_ p1: Any, _ p2: Any) -> String {
-    return L10n.tr("Localizable", "Expenses of %@ - %@", String(describing: p1), String(describing: p2))
-  }
-  /// Filtrar
-  internal static let filter = L10n.tr("Localizable", "Filter")
-  /// Ingresos
-  internal static let incomes = L10n.tr("Localizable", "Incomes")
-  /// Ingresos de %@ - %@
-  internal static func incomesOf(_ p1: Any, _ p2: Any) -> String {
-    return L10n.tr("Localizable", "Incomes of %@ - %@", String(describing: p1), String(describing: p2))
-  }
-  /// Mes
-  internal static let month = L10n.tr("Localizable", "Month")
-  /// Año
-  internal static let year = L10n.tr("Localizable", "Year")
+  /// Compras en cuotas
+  internal static let multiPaymentExpenses = L10n.tr("Localizable", "Multi-payment expenses")
+  /// Otros gastos
+  internal static let otherExpenses = L10n.tr("Localizable", "Other expenses")
+  /// Otros ingresos
+  internal static let otherIncomes = L10n.tr("Localizable", "Other incomes")
+  /// Gastos fijos
+  internal static let permanentExpenses = L10n.tr("Localizable", "Permanent expenses")
+  /// Ingresos fijos
+  internal static let permanentIncomes = L10n.tr("Localizable", "Permanent incomes")
+  /// Resumen
+  internal static let summary = L10n.tr("Localizable", "Summary")
+  /// Total
+  internal static let total = L10n.tr("Localizable", "Total")
+  /// No tienes movimientos
+  internal static let youDonTHaveMovements = L10n.tr("Localizable", "You don't have movements")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
@@ -47,6 +43,12 @@ extension L10n {
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-    static let bundle = Bundle.module
+  static let bundle: Bundle = {
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
+  }()
 }
 // swiftlint:enable convenience_type
