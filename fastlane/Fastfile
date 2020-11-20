@@ -46,6 +46,7 @@ platform :ios do
       cobertura_xml: "true",
       build_directory: "./DerivedData",
       sonarqube_xml: true,
+      cobertura_xml: false,
       ignore: [
         "*/Package.swift",
         "DerivedData/*",
