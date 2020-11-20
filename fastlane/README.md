@@ -16,16 +16,26 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios custom_lane
+### ios ios_all
 ```
-fastlane ios custom_lane
+fastlane ios ios_all
 ```
-Description of what the lane does
+All iOS lanes
 ### ios run_all_test_ios
 ```
 fastlane ios run_all_test_ios
 ```
 Run all test for iOS modules
+### ios coverage_ios
+```
+fastlane ios coverage_ios
+```
+Calculate the code coverage for iOS packages
+### ios lint
+```
+fastlane ios lint
+```
+Lint all files
 
 ----
 

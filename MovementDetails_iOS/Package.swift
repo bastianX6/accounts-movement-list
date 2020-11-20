@@ -43,7 +43,7 @@ let package = Package(
             resources: [.process("Resources")]
         ),
         .testTarget(
-            name: "MovementDetails_iOSTests",
+            name: "MovementDetails.iOS.Tests",
             dependencies: ["MovementDetails_iOS"]
         )
     ]

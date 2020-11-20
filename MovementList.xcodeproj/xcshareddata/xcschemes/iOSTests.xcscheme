@@ -14,10 +14,24 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "MovementDetails_iOSTests"
-               BuildableName = "MovementDetails_iOSTests"
-               BlueprintName = "MovementDetails_iOSTests"
+               BlueprintIdentifier = "MovementDetails.iOS.Tests"
+               BuildableName = "MovementDetails.iOS.Tests"
+               BlueprintName = "MovementDetails.iOS.Tests"
                ReferencedContainer = "container:MovementDetails_iOS">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "MovementList.iOS.Tests"
+               BuildableName = "MovementList.iOS.Tests"
+               BlueprintName = "MovementList.iOS.Tests"
+               ReferencedContainer = "container:MovementList_iOS">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -32,20 +46,6 @@
                BuildableName = "MovementListCommonTests"
                BlueprintName = "MovementListCommonTests"
                ReferencedContainer = "container:MovementListCommon">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "MovementList_iOSTests"
-               BuildableName = "MovementList_iOSTests"
-               BlueprintName = "MovementList_iOSTests"
-               ReferencedContainer = "container:MovementList_iOS">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -54,16 +54,27 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "MovementDetails_iOSTests"
-               BuildableName = "MovementDetails_iOSTests"
-               BlueprintName = "MovementDetails_iOSTests"
+               BlueprintIdentifier = "MovementDetails.iOS.Tests"
+               BuildableName = "MovementDetails.iOS.Tests"
+               BlueprintName = "MovementDetails.iOS.Tests"
                ReferencedContainer = "container:MovementDetails_iOS">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "MovementList.iOS.Tests"
+               BuildableName = "MovementList.iOS.Tests"
+               BlueprintName = "MovementList.iOS.Tests"
+               ReferencedContainer = "container:MovementList_iOS">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -74,16 +85,6 @@
                BuildableName = "MovementListCommonTests"
                BlueprintName = "MovementListCommonTests"
                ReferencedContainer = "container:MovementListCommon">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "MovementList_iOSTests"
-               BuildableName = "MovementList_iOSTests"
-               BlueprintName = "MovementList_iOSTests"
-               ReferencedContainer = "container:MovementList_iOS">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -105,6 +106,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "MovementDetails.iOS.Tests"
+            BuildableName = "MovementDetails.iOS.Tests"
+            BlueprintName = "MovementDetails.iOS.Tests"
+            ReferencedContainer = "container:MovementDetails_iOS">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
