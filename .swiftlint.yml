@@ -17,8 +17,6 @@ included:
  - MovementListCommon
  - MovementList_iOS
  - MovementDetails_iOS
- - YapoUITests
- - YapoSnapshotUITests
 excluded:
   - ./*/Package.swift
   - ./*/DerivedData
@@ -38,4 +36,4 @@ function_parameter_count:
   warning: 6
   error: 7
 line_length: 160
-reporter: "checkstyle"
+reporter: "sonarqube"
