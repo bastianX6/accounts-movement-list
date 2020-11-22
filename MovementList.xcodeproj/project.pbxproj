@@ -7,18 +7,14 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		03F57B2E256746A400E49C60 /* MovementDetails_iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MovementDetails_iOS; sourceTree = "<group>"; };
-		03F57B2F256746AF00E49C60 /* MovementList_iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MovementList_iOS; sourceTree = "<group>"; };
-		03F57B30256746B600E49C60 /* MovementListCommon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MovementListCommon; sourceTree = "<group>"; };
+		03A58DA0256AC8C4005196D3 /*  */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ""; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		03D6D81F25674632003C3463 = {
 			isa = PBXGroup;
 			children = (
-				03F57B30256746B600E49C60 /* MovementListCommon */,
-				03F57B2F256746AF00E49C60 /* MovementList_iOS */,
-				03F57B2E256746A400E49C60 /* MovementDetails_iOS */,
+				03A58DA0256AC8C4005196D3 /*  */,
 			);
 			sourceTree = "<group>";
 		};

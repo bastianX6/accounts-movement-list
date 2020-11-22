@@ -14,11 +14,11 @@ opt_in_rules:
   - weak_delegate
   - file_length
 included: 
- - MovementListCommon
- - MovementList_iOS
- - MovementDetails_iOS
+ - Sources/MovementListCommon
+ - Sources/MovementList_iOS
+ - Sources/MovementDetails_iOS
 excluded:
-  - ./*/Package.swift
+  - Package.swift
   - ./*/DerivedData
   - ./*/.build
 identifier_name:
