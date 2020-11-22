@@ -48,11 +48,11 @@ platform :ios do
       sonarqube_xml: true,
       cobertura_xml: false,
       ignore: [
-        "*/Package.swift",
+        "Package.swift",
         "DerivedData/*",
         "*/Tests/*"
       ],
-      source_directory: "./"
+      source_directory: "./Sources"
     )
   end
 

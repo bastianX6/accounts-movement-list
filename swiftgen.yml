@@ -1,9 +1,9 @@
 strings:
-  - inputs: MovementList_iOS/Sources/MovementList_iOS/Resources/es.lproj
+  - inputs: Sources/MovementList_iOS/Resources/es.lproj
     outputs:
     - templateName: structured-swift5
-      output: MovementList_iOS/Sources/MovementList_iOS/Localization/Strings.swift
-  - inputs: MovementDetails_iOS/Sources/MovementDetails_iOS/Resources/es.lproj
+      output: Sources/MovementList_iOS/Localization/Strings.swift
+  - inputs: Sources/MovementDetails_iOS/Resources/es.lproj
     outputs:
     - templateName: structured-swift5
-      output: MovementDetails_iOS/Sources/MovementDetails_iOS/Localization/Strings.swift
+      output: Sources/MovementDetails_iOS/Localization/Strings.swift
