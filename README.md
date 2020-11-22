@@ -1,5 +1,8 @@
 # accounts-movement-list
 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=bastianX6_accounts-movement-list)](https://sonarcloud.io/dashboard?id=bastianX6_accounts-movement-list)
+[![Build Status](https://app.bitrise.io/app/9dfe7385403be86f/status.svg?token=tNNiW2BcZea9enJqgWXRsA)](https://app.bitrise.io/app/9dfe7385403be86f)
+
 This package contains the logic to:
 - Show a summary of added movements.
 - Show movements grouped by category/store.

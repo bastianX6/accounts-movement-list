@@ -1,0 +1,66 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "All iOS lanes"
+  lane :ios_all do
+    sh("mkdir -p ../sonar-reports")
+    lint
+    run_all_test_ios
+    coverage_ios
+  end
+
+  desc "Run all test for iOS modules"
+  lane :run_all_test_ios do
+    run_tests(
+      project: "MovementList.xcodeproj",
+      scheme: "iOSTests",
+      sdk: "iphonesimulator14.2",
+      device: "iPhone 8 (14.2)",
+      derived_data_path: "./DerivedData",
+      output_directory: "sonar-reports",
+      clean: true,
+    )
+  end
+
+  desc "Calculate the code coverage for iOS packages"
+  lane :coverage_ios do
+    slather(
+      scheme: "iOSTests",
+      proj: "MovementList.xcodeproj",
+      output_directory: "sonar-reports",
+      cobertura_xml: "true",
+      build_directory: "./DerivedData",
+      sonarqube_xml: true,
+      cobertura_xml: false,
+      ignore: [
+        "Package.swift",
+        "DerivedData/*",
+        "*/Tests/*"
+      ],
+      source_directory: "./Sources"
+    )
+  end
+
+  desc "Lint all files"
+  lane :lint do
+    swiftlint(
+      output_file: "sonar-reports/MovementList-swiftlint.txt",
+      ignore_exit_status: true
+    )
+  end
+end
