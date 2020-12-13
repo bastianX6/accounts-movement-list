@@ -11,7 +11,7 @@ import Foundation
 import MovementListCommon
 import SwiftUI
 
-class MovementDetailsViewModel: ObservableObject {
+class MovementDetailsViewModel: ObservableObject, MovementDetailsViewModelProtocol {
     @Published var model: MovementDetailsModel
     @Published var state: MovementDetailViewState
     var movements: [Movement] = []

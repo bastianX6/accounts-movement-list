@@ -8,6 +8,7 @@
 import AccountsUI
 import DependencyResolver
 import SwiftUI
+import MovementListCommon
 
 public struct ContainerView: View {
     private let dataModel: MovementDetailsDataModel
@@ -25,7 +26,7 @@ public struct ContainerView: View {
                                                 forType: MovementDetailsAvailability.self)
         let viewModel = MovementDetailsViewModel(dataModel: self.dataModel)
 
-        return ContainerViewiOS(viewModel: viewModel)
+        return ContainerViewInternal(viewModel: viewModel)
     }
 }
 

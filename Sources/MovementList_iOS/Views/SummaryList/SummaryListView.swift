@@ -8,6 +8,7 @@
 import AccountsUI
 import DependencyResolver
 import MovementDetails_iOS
+import MovementListCommon
 import SwiftUI
 
 struct SummaryListView: View {
@@ -27,7 +28,8 @@ struct SummaryListView: View {
     }
 
     init(viewModel: MovementListViewModel,
-         dataModel: Binding<SummaryListView.DataModel>) {
+         dataModel: Binding<SummaryListView.DataModel>)
+    {
         self.viewModel = viewModel
         self._dataModel = dataModel
     }
@@ -47,10 +49,11 @@ struct SummaryListView: View {
 
     func getNavigationLink(model: MovementSimpleCardModel) -> some View {
         guard let fromDate = self.viewModel.filterDate.startOfMonth(),
-            let toDate = self.viewModel.filterDate.endOfMonth(),
-            let currentCategoryStore = self.viewModel
-            .categoryStoreElements
-            .first(where: { $0.id == model.id }) else {
+              let toDate = self.viewModel.filterDate.endOfMonth(),
+              let currentCategoryStore = self.viewModel
+              .categoryStoreElements
+              .first(where: { $0.id == model.id })
+        else {
             return Text("").eraseToAnyView()
         }
         let dataModel = MovementDetailsDataModel(categoryStoreData: currentCategoryStore,

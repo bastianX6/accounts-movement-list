@@ -8,6 +8,7 @@
 import AccountsUI
 import DependencyResolver
 import MovementDetailsMacOS
+import MovementListCommon
 import SwiftUI
 
 struct SummaryListView: View {

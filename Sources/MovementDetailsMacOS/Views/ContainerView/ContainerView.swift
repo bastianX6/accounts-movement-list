@@ -8,6 +8,7 @@
 import AccountsUI
 import DependencyResolver
 import SwiftUI
+import MovementListCommon
 
 public struct ContainerView: View {
     private let dataModel: MovementDetailsDataModel
