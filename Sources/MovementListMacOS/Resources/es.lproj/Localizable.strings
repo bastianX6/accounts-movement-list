@@ -1,0 +1,10 @@
+// MARK: - Summary View
+"Expenses" = "Gastos";
+"Incomes" = "Ingresos";
+"Expenses of %@ - %@" = "Gastos de %@ - %@";
+"Incomes of %@ - %@" = "Ingresos de %@ - %@";
+"Filter" = "Filtrar";
+"Coulnd't load your data" = "No pudimos obtener la información";
+"Month" = "Mes";
+"Year" = "Año";
+"Cancel" = "Cancelar";
