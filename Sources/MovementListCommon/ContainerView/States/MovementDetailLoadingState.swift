@@ -8,24 +8,19 @@
 import Combine
 import DataManagement
 import Foundation
-import MovementListCommon
 
-class MovementDetailLoadingState: MovementDetailViewState {
-    weak var viewModel: MovementDetailsViewModel?
-
-    var showErrorView: Bool = false
-    var showLoadingView: Bool = true
-    var showEditMovementView: Bool = false
-    var error: Error?
-    var selectedMovement: Movement?
+public class MovementDetailLoadingState: MovementDetailInitialState {
+    public weak var viewModel: MovementDetailsViewModelProtocol?
 
     var cancellables: [AnyCancellable] = []
 
-    init(viewModel: MovementDetailsViewModel?) {
+    public init(viewModel: MovementDetailsViewModelProtocol?) {
         self.viewModel = viewModel
+        super.init()
+        self.showLoadingView = true
     }
 
-    func loadData() {
+    override public func loadData() {
         guard let viewModel = self.viewModel else {
             fatalError("You should set a viewModel")
         }

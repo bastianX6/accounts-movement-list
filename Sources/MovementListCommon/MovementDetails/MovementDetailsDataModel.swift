@@ -12,11 +12,11 @@ import SwiftUI
 
 /// Struct with all required data to init the module
 public struct MovementDetailsDataModel {
-    let categoryStoreData: CategoryStoreModel
-    let isIncome: Bool
-    let dataSourceRead: DataSourceRead
-    let fromDate: Date
-    let toDate: Date
+    public let categoryStoreData: CategoryStoreModel
+    public let isIncome: Bool
+    public let dataSourceRead: DataSourceRead
+    public let fromDate: Date
+    public let toDate: Date
 
     /// Default initializer
     /// - Parameters:
@@ -29,7 +29,8 @@ public struct MovementDetailsDataModel {
                 isIncome: Bool,
                 dataSourceRead: DataSourceRead,
                 fromDate: Date,
-                toDate: Date) {
+                toDate: Date)
+    {
         self.categoryStoreData = categoryStoreData
         self.isIncome = isIncome
         self.dataSourceRead = dataSourceRead

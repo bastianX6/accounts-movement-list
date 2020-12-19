@@ -9,7 +9,7 @@ let package = Package(
     platforms: [
         .iOS(.v14),
         .tvOS(.v14),
-        .macOS(.v10_15),
+        .macOS(.v11),
         .watchOS(.v7)
     ],
     products: [
@@ -24,6 +24,14 @@ let package = Package(
         .library(
             name: "MovementDetails_iOS",
             targets: ["MovementDetails_iOS"]
+        ),
+        .library(
+            name: "MovementDetailsMacOS",
+            targets: ["MovementDetailsMacOS"]
+        ),
+        .library(
+            name: "MovementListMacOS",
+            targets: ["MovementListMacOS"]
         ),
     ],
     dependencies: [
@@ -85,6 +93,38 @@ let package = Package(
         .testTarget(
             name: "MovementDetails.iOS.Tests",
             dependencies: ["MovementDetails_iOS"]
-        )
+        ),
+        // MovementDetailsMacOS
+        .target(
+            name: "MovementDetailsMacOS",
+            dependencies: [
+                "DataManagement",
+                "AccountsUI",
+                "MovementListCommon",
+                "DependencyResolver",
+                .product(name: "NewMovementMacOS", package: "NewMovement")
+            ],
+            resources: [.process("Resources")]
+        ),
+        .testTarget(
+            name: "MovementDetails.macOS.Tests",
+            dependencies: ["MovementDetailsMacOS"]
+        ),
+        // MovementListMacOS
+        .target(
+            name: "MovementListMacOS",
+            dependencies: [
+                "DataManagement",
+                "AccountsUI",
+                "MovementListCommon",
+                "MovementDetailsMacOS",
+                "DependencyResolver",
+            ],
+            resources: [.process("Resources")]
+        ),
+        .testTarget(
+            name: "MovementList.macOS.Tests",
+            dependencies: ["MovementListMacOS"]
+        ),
     ]
 )

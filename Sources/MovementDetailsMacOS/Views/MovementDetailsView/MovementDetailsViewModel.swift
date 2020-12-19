@@ -21,7 +21,7 @@ class MovementDetailsViewModel: ObservableObject, MovementDetailsViewModelProtoc
     private let editState = MovementDetailEditState()
     private let loadingState: MovementDetailLoadingState
 
-    var dataModel: MovementDetailsDataModel
+    let dataModel: MovementDetailsDataModel
 
     init(dataModel: MovementDetailsDataModel) {
         self.dataModel = dataModel

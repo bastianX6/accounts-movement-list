@@ -1,13 +1,12 @@
 //
 //  Tests.swift
+//  
 //
-//
-//  Created by Bastián Véliz Vega on 19-11-20.
+//  Created by Bastián Véliz Vega on 12-12-20.
 //
 
 import Foundation
-
-@testable import MovementDetails_iOS
+@testable import MovementDetailsMacOS
 import XCTest
 
 final class Tests: XCTestCase {

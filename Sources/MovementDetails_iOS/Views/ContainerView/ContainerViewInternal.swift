@@ -1,5 +1,5 @@
 //
-//  ContainerViewiOS.swift
+//  ContainerViewInternal.swift
 //
 //
 //  Created by Bastián Véliz Vega on 05-10-20.
@@ -10,7 +10,7 @@ import DependencyResolver
 import NewMovement_iOS
 import SwiftUI
 
-struct ContainerViewiOS: View {
+struct ContainerViewInternal: View {
     @ObservedObject var viewModel: MovementDetailsViewModel
     @EnvironmentObject var resolver: DependencyResolver
 
@@ -118,9 +118,9 @@ struct ContainerViewiOS_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            ContainerViewiOS(viewModel: self.viewModel)
-            ContainerViewiOS(viewModel: self.viewModelWithErrorState)
-            ContainerViewiOS(viewModel: self.viewModelWithLoadingState)
+            ContainerViewInternal(viewModel: self.viewModel)
+            ContainerViewInternal(viewModel: self.viewModelWithErrorState)
+            ContainerViewInternal(viewModel: self.viewModelWithLoadingState)
         }
     }
 }
