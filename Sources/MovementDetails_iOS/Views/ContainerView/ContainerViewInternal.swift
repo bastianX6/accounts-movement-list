@@ -8,6 +8,7 @@
 import AccountsUI
 import DependencyResolver
 import NewMovement_iOS
+import NewMovementCommon
 import SwiftUI
 
 struct ContainerViewInternal: View {
@@ -74,14 +75,15 @@ struct ContainerViewInternal: View {
         .sheet(isPresented: self.$viewModel.state.showEditMovementView,
                content: {
                    self.editView
-        })
+               })
     }
 
     var editView: some View {
         guard let movement = self.viewModel.state.selectedMovement,
-            let dataSourceModify = try? self.resolver.getDataSourceModify(forType: MovementDetailsAvailability.self),
-            let incomeData = try? self.resolver.getIncomeResources(forType: MovementDetailsAvailability.self),
-            let expenditureData = try? self.resolver.getExpenditureResources(forType: MovementDetailsAvailability.self) else {
+              let dataSourceModify = try? self.resolver.getDataSourceModify(forType: MovementDetailsAvailability.self),
+              let incomeData = try? self.resolver.getIncomeResources(forType: MovementDetailsAvailability.self),
+              let expenditureData = try? self.resolver.getExpenditureResources(forType: MovementDetailsAvailability.self)
+        else {
             return Text("").eraseToAnyView()
         }
 

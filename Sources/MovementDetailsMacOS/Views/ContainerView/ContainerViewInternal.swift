@@ -9,6 +9,7 @@ import AccountsUI
 import DependencyResolver
 import NewMovementMacOS
 import SwiftUI
+import NewMovementCommon
 
 struct ContainerViewInternal: View {
     @ObservedObject var viewModel: MovementDetailsViewModel
